@@ -1,0 +1,36 @@
+.myorder{
+    margin-bottom: 2rem;
+}
+
+.myorder .title{
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 2rem 5rem;
+}
+
+.myorder .content{
+    width: 60%;
+    margin: auto;
+    border: 1px solid gray;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.myorder li {
+    border: 1px solid rgb(168, 168, 168);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    margin: 3px;
+}
+
+.myorder .no_content{
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20rem
+}
+
+.myorder hr{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    border: 2px solid gray;
+}

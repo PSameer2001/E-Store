@@ -1,0 +1,88 @@
+.ForgetDiv {
+    overflow: hidden;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #e9ba8c;
+}
+
+.ForgetDiv .divContainer {
+    max-height: 80vh;
+    padding-top: 10px;
+    width: 80vh;
+    border-radius: 10px;
+    box-shadow: 0px 6px 6px 0px rgb(77, 83, 86);
+    position: relative;
+    margin: 10% auto;
+    background-color: #fff;
+}
+
+.ForgetDiv .title {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(255, 153, 0);
+    margin: 15px 0px;
+}
+
+.ForgetDiv #forget_btn {
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff8c6b;
+}
+
+.ForgetDiv form {
+    padding: 5px 15px
+}
+
+.ForgetDiv .form-control{
+    border: #ff8c6b;
+}
+
+.ForgetDiv .form-control{
+    border-top: 1px solid #e9ba8c;
+    border-left: 1px solid #e9ba8c;
+    border-bottom: 3px solid #e9ba8c;
+    border-right: 3px solid #e9ba8c;
+  }
+
+  .ForgetDiv  .expire_text,.ForgetDiv  .timer {
+    color: rgb(3, 151, 151) !important ;
+  }
+
+  .ForgetDiv .otp_btn {
+    text-decoration: none;
+    border: none;
+    color: rgb(255, 153, 0);
+    background: none;
+  }
+
+  .ForgetDiv .back_login{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  @media(max-width:550px){
+    .ForgetDiv .divContainer {
+        width: 70vh;
+    }
+  }
+
+  @media(max-width:480px){
+    .ForgetDiv .divContainer {
+        width: 60vh;
+    }
+  }
+
+  @media(max-width:400px){
+    .ForgetDiv .divContainer {
+        width: 50vh;
+    }
+}
+
+@media(max-width:340px){
+    .ForgetDiv .divContainer {
+        width: 45vh;
+    }
+}

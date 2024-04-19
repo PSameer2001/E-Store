@@ -1,0 +1,57 @@
+.EmailVerif_div {
+  overflow: hidden;
+  background-color: #e9ba8c;
+  min-height: 30vh;
+  width: 100%;
+}
+
+.EmailVerif_div .divContainer {
+  height: 40vh;
+  width: 80vh;
+  border-radius: 10px;
+  box-shadow: 0px 6px 6px 0px rgb(77, 83, 86);
+  background-color: #fff;
+  position: relative;
+  margin: 10% auto;
+}
+
+.EmailVerif_div .title {
+  text-align: center;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgb(255, 153, 0);
+  margin: 15px 0px;
+}
+
+
+.EmailVerif_div form {
+  padding: 5px 15px
+}
+
+.EmailVerif_div .form-control {
+  border: #ff8c6b;
+}
+
+.EmailVerif_div .form-control {
+  border-top: 1px solid #e9ba8c;
+  border-left: 1px solid #e9ba8c;
+  border-bottom: 3px solid #e9ba8c;
+  border-right: 3px solid #e9ba8c;
+}
+
+.EmailVerif_div h6 {
+  color: darkcyan;
+}
+
+.EmailVerif_div .back_login {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.EmailVerif_div #verify_btn {
+  text-align: center;
+  color: #ffffff;
+  background-color: #ff8c6b;
+}

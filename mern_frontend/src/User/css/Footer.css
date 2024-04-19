@@ -1,0 +1,44 @@
+footer h6 {
+    color: aliceblue !important;
+}
+
+footer .social_icon {
+    margin: 0 12px !important;
+}
+
+footer p{
+    margin-bottom: 10px;
+}
+
+footer .p-3{
+    padding: 8px !important;
+}
+
+@media (max-width:768px){
+    footer .links_details h6{
+        text-align: left;
+        margin-bottom: 3px;
+        margin-top: 30px;
+    }
+
+    .webh6 , .ph6{
+        margin-top: 8px !important ;
+    }
+
+    footer .links_details p{
+        text-align: left;
+    }
+
+    footer .social_icon{
+        margin: 3px 12px !important;
+    }
+
+    footer hr{
+        margin-bottom: 3px;
+        text-align: left;
+    }
+
+    footer .links_details{
+        padding: 0 10px
+    }
+}

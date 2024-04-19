@@ -1,0 +1,257 @@
+.cartbox {
+    margin-bottom: 4rem;
+}
+
+.cartbox .card1 {
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 4px;
+}
+
+.cartbox .font-weight-bold {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.cartbox .prodcart {
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    border-radius: 2rem;
+}
+
+.cartbox .right_side {
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.cartbox .main_cart {
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+}
+
+.cartbox .main1_cart {
+    margin: auto;
+    margin-top: 2rem;
+    cursor: pointer;
+    border: 1px solid #5f676e;
+}
+
+.cartbox .imgbox1 {
+    margin: 5px auto;
+    border-radius: 1.5rem;
+}
+
+.cartbox .imgbox1 img {
+    border-radius: 2.5rem;
+}
+
+.cartbox .prodetail {
+    margin: 6px auto;
+}
+
+.cartbox .product_name {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.cartbox .set_quantity {
+    position: relative;
+}
+
+.cartbox .set_quantity::after {
+    content: "";
+    width: auto;
+    height: auto;
+    text-align: center;
+    position: absolute;
+    bottom: -1.4rem;
+    right: 2.5rem;
+    font-size: 0.8rem;
+
+}
+
+.cartbox .page-link {
+    line-height: 1.8rem;
+    width: 3.5rem;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #495057;
+    padding: 0.3rem;
+}
+
+.cartbox .page-link:focus {
+    box-shadow: none;
+}
+
+.cartbox .page-item input {
+    line-height: 1.6rem;
+    padding: 0.0rem;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cartbox .card-title p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777;
+}
+
+.cartbox .remove_wish span {
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #222;
+    text-decoration: none;
+    text-shadow: 0 0.5rem 0.7rem rgba(0, 0, 0, 0.2);
+}
+
+.cartbox .remove_wish span:hover {
+    color: #f9af5a;
+}
+
+.cartbox .price_money h3 {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #222;
+    text-shadow: 0 0.5rem 0.7rem rgba(0, 0, 0, 0.2);
+}
+
+.cartbox .carrd-body a {
+    justify-content: space-between;
+    text-decoration: none;
+    color: #223;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
+.cartbox #addclint {
+    margin: 7px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: #222;
+    font-weight: 400;
+    line-height: 0.7em;
+}
+
+.cartbox #textclint {
+    margin-bottom: 1rem;
+    padding: 3px;
+    font-size: 15px;
+    color: #333;
+    background: #d9d9d9;
+    text-decoration: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+
+
+.cartbox .card2 {
+    border: .2rem solid #999;
+    padding: 6px 5px;
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.cartbox #discount_code1 {
+    font-size: 1rem;
+    color: #333;
+    background: #d9d9d9;
+    text-decoration: none;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+
+.cartbox #appbtn {
+    cursor: pointer;
+    border-radius: 2.5rem;
+    padding: 8px 25px;
+    font-size: 0.8rem;
+}
+
+.cartbox .price_indiv p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 2px;
+}
+
+.cartbox .total-amt p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #777;
+    margin-bottom: 2px;
+}
+
+.cartbox h5 {
+    font-size: 15px;
+}
+
+.cartbox .delivery {
+    font-size: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.cartbox #coupons_div {
+    padding: 2px;
+}
+
+.cartbox .coupon_list {
+    padding: 2px 5px;
+    font-weight: bold;
+    color: brown;
+    padding-top: 5px;
+
+}
+
+.cartbox .coupon_btn {
+    background-color: #f9af5a;
+    padding: 3px;
+    margin: 3px 1px;
+    border-radius: 5px;
+}
+
+.cartbox .coupon_btn:hover {
+    background-color: #0d6efd;
+}
+
+.cartbox .outer_coupon {
+    border: 1px solid #777;
+    margin-bottom: 3px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+}
+
+@media(max-width:400px) {
+    .cartbox .imgbox1 {
+        height: 50%;
+        width: 70%;
+    }
+
+    .cartbox .prodetail {
+        h1 {
+            font-size: 18px;
+        }
+
+        input {
+            font-size: 11px;
+            width: 3rem;
+            height: 1.5rem;
+        }
+
+        p {
+            font-size: 15px;
+        }
+
+        h3 {
+            font-size: 16px;
+        }
+    }
+}

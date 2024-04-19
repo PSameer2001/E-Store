@@ -1,0 +1,21 @@
+.category_product .ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 20rem;
+}
+
+.category_product .previous {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.category_product .no_content {
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20rem
+}

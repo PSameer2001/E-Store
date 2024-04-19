@@ -1,0 +1,47 @@
+.ProfileContainer {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+    min-height: 100%;
+}
+
+.ProfileContainer .card {
+    min-height: 40%;
+}
+
+.ProfileContainer .card-body {
+    margin-top: 2px;
+    min-height: 38%;
+    overflow-y: auto;
+}
+
+.ProfileContainer .logout_btn {
+    border: none;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fd7e14;
+}
+
+.ProfileContainer #address {
+    resize: none;
+}
+
+.ProfileContainer #update_btn {
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff8c6b;
+    height: 35px;
+    width: 25%;
+    border-radius: 10px;
+}
+
+.ProfileContainer  .profile_img{
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:576px) {
+    .ProfileContainer .navpills {
+        border: 1px solid gray;
+    }
+}

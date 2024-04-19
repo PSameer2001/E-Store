@@ -1,0 +1,296 @@
+.navbarHeader {
+    background-color: antiquewhite;
+    top: 0;
+    position: sticky;
+    z-index: 999;
+}
+
+.navbarHeader nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 0 0.5rem;
+}
+
+.navbarHeader nav a.active {
+    color: rgb(0, 119, 255);
+    font-weight: bold;
+}
+
+.navbarHeader nav a.navbar-brand {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 500;
+    font-size: medium;
+    color: #000000;
+    font-size: 25px;
+    display: inline-block;
+}
+
+.navbarHeader .navbar-title {
+    vertical-align: top;
+    text-align: left;
+    flex: auto;
+}
+
+.navbarHeader .brandImg {
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+    padding-top: 2px;
+    vertical-align: top;
+}
+
+.navbarHeader .login_btn {
+    align-self: right;
+    text-align: right;
+}
+
+.navbarHeader .login_user {
+    text-align: center;
+}
+
+.navbarHeader .username {
+    margin-right: 15px;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    color: deeppink;
+
+}
+
+.navbarHeader .logout_btn_txt {
+    color: brown;
+}
+
+.navbarHeader .logout_btn_txt :hover {
+    color: rgb(133, 9, 249);
+}
+
+.navbarHeader .search-form {
+    height: 3rem;
+    width: 100%;
+    border-radius: 1rem;
+    background: #f5f5f5;
+    border: 1px solid;
+    margin: 0px auto;
+    position: absolute;
+    top: 0rem;
+    z-index: 0;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+
+.navbarHeader .search-form.active {
+    display: block;
+    position: absolute;
+    position: fixed;
+    visibility: visible;
+    transition: 0.5s;
+    opacity: 1;
+    top: 3.6rem;
+    z-index: 100;
+}
+
+.navbarHeader #search-box {
+    border: none;
+    height: 2.5rem;
+    width: 95%;
+    border-radius: 1rem;
+    background: #f5f5f5;
+    padding: 0px 10px;
+}
+
+.navbarHeader #search-box:focus-visible {
+    border: none;
+    background: #f5f5f5;
+}
+
+.navbarHeader .search_btn {
+    border: none;
+    background: none;
+}
+
+.navbarHeader .navbar-toggler {
+    visibility: hidden;
+}
+
+.navbarHeader .navbar .icons {
+    display: flex;
+    flex-direction: row;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.navbarHeader .navbar #menu-btn {
+    padding: 0px 7px;
+}
+
+.navbarHeader .navbar #search-btn {
+    padding: 0px 7px;
+}
+
+.navbarHeader .navbar .user {
+    padding: 0px 4px;
+}
+
+.navbarHeader .navbar .cart {
+    padding: 0px 7px;
+}
+
+.navbarHeader .navbar .userr{
+    position: absolute;
+    top: 4rem; right: 5rem;
+    padding: 0px 10px;
+    background: #fff;
+    width: 13rem;
+    -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
+    border-radius: 1.5rem;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.navbarHeader .navbar .userr.active{
+    visibility: visible;
+    opacity: 1;
+}
+
+.navbarHeader .navbar .userr .profile #close-profile{
+    position: absolute;
+    top: 1rem; right: 1.8rem;
+    font-size: 15px;
+    color: #e84393;
+    cursor: pointer;
+  }
+
+  .navbarHeader .navbar .userr .profile::before{
+    content: "";
+    position: absolute;
+    top: -0.5rem; right: 2.8rem;
+    width: 2rem; height: 2rem;
+    background: #fff;
+    transform: rotate(45deg); 
+  }
+  
+  .navbarHeader  .navbar .userr .profile h3{
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    padding: 30px 0 0 0;
+    font-weight: 500;
+    color: #555;
+    line-height: 1em;
+  }
+  
+  .navbarHeader  .navbar .userr .profile h3 span{
+    font-size: 15px;
+    color: #cecece;
+    font-weight: 400;
+  }
+
+  .navbarHeader  .navbar .userr .profile ul{
+    padding: 1px 15px !important;
+  }
+  
+  .navbarHeader .navbar .userr .profile ul li{
+    list-style: none;
+    padding: 3px 0;
+    border-top: 0.2rem solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbarHeader .navbar .userr .profile ul li svg{
+    max-width: 2rem;
+    margin-right: 1.5rem;
+    opacity: 0.4;
+    transition: 0.5s;
+    font-size: 20px;
+  }
+  
+  .navbarHeader .navbar .userr .profile ul li:hover svg{
+    opacity: 1;
+  }
+  
+  .navbarHeader .navbar .userr .profile ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
+    font-size: 16px;
+  }
+  
+  .navbarHeader .navbar .userr .profile ul li:hover a{
+    color: #ff5d94;
+  }
+
+  @media (min-width:1200px){
+    .navbarHeader .navbar .userr{
+        right: 6rem
+    }
+  }
+
+  @media (min-width:1300px){
+    .navbarHeader .navbar .userr{
+        right: 7rem
+    }
+  }
+
+  @media (max-width:991px){
+    .navbarHeader .navbar .userr{
+        right: 3rem
+    }
+  }
+  
+
+  @media (max-width:768px){
+    .navbarHeader .navbar .userr{
+        right: 5px
+    }
+  }
+
+  @media (max-width:500px){
+    .navbarHeader .navbar .userr{
+        right: 5px
+    }
+  }
+
+  @media (max-width:600px){
+    .navbarHeader .navbar .userr{
+        right: 5px
+    }
+  }
+
+  @media (max-width:325px){
+    .navbarHeader .navbar .userr{
+        right: 5rem;
+        top: 6rem;
+    }
+
+    .navbarHeader .search-form.active{
+      top: 5.6rem;
+  }
+  }
+  
+
+  @media (max-width:360px){
+    .navbarHeader .navbar .userr{
+        right: 5.5rem;
+        top: 6rem;
+    }
+
+
+    .navbarHeader .navbar-title{
+        text-align: center;
+    }
+  }
+
+  @media (max-width:348px){
+    .navbarHeader #search-box {
+        width: 90%;
+    }
+  }

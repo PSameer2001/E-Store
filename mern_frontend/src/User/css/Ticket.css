@@ -1,0 +1,36 @@
+.myticket{
+    margin-bottom: 2rem;
+}
+
+.myticket .title{
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    padding: 2rem 5rem;
+}
+
+.myticket .content{
+    width: 60%;
+    margin: auto;
+    border: 1px solid gray;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.myticket li {
+    border: 1px solid rgb(168, 168, 168);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    margin: 3px;
+}
+
+.myticket .no_content{
+    border: none;
+    text-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20rem
+}
+
+.myticket hr{
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    border: 2px solid gray;
+}

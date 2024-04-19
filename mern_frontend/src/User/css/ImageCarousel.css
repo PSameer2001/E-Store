@@ -1,0 +1,12 @@
+.imgCarousel .carouselImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    mix-blend-mode: normal;
+}
+
+.imgCarousel .carousel {
+    width: 60%;
+    height: 60%;
+    margin: auto;
+}

@@ -1,0 +1,26 @@
+.adminuser_div p, .adminlist_div p, .admincategory_div p, .adminproducts_div p, .adminproductsimage_div p, .adminsection_div p, .admincoupon_div p, .adminorder_div p, .admincontact_div p,.adminorder_detail_div p{
+    margin-bottom: 0px !important;
+}
+
+.headerdrawer a{
+    text-decoration: none;
+    color: black;
+}
+
+.headerdrawer a span{
+    text-decoration: none;
+    color: black;
+}
+
+.headerdrawer a.active span{
+    color:#1976d2;
+    font-weight: bold;
+}
+
+.adminproducts_div .return ,.adminproductsimage_div .return, .adminorder_detail_div .return{
+    text-decoration: none;
+    color: rgb(0, 0, 8);
+    margin-right: 5px;
+    background-color: rgb(215, 236, 250);
+    padding: 15px;
+}
