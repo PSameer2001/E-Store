@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix ../mern_frontend",
     "server": "nodemon index",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "nodemon index"
   },
   "keywords": [],
   "author": "",
