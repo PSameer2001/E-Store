@@ -79,7 +79,7 @@ const Profile = (props) => {
       let formObject = Object.fromEntries(formData.entries());
       // console.log(formObject);
 
-      const res = await axios.post("/updateUser", formObject);
+      const res = await axios.post(`${process.env.SERVER_URL}/updateUser`, formObject);
       let message = res.data.message;
 
       if (message === "success") {
@@ -120,7 +120,7 @@ const Profile = (props) => {
       }
 
       setIsPasswordLoading(true);
-      const res = await axios.post("/updatePassword", {
+      const res = await axios.post(`${process.env.SERVER_URL}/updatePassword`, {
         email,
         currentPassword,
         newPassword,
@@ -161,7 +161,7 @@ const Profile = (props) => {
         toast.error("Only JPG, PNG and PNG file type are allowed", { duration: 1500 });
         return false;
       }
-      const res = await axios.post("/updateProfilePhoto", formData);
+      const res = await axios.post(`${process.env.SERVER_URL}/updateProfilePhoto`, formData);
       let message = res.data.message;
 
       if (message === "success") {

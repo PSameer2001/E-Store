@@ -15,7 +15,7 @@ const CategorySwiper = () => {
   const [data, setData] = useState([]);
 
   const getallCategoryData = async () => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`${process.env.SERVER_URL}/getallCategoryData`);
     const data = res.data;
     setData(data);
   };
