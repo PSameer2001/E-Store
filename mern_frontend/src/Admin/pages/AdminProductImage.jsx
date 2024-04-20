@@ -42,7 +42,7 @@ const AdminProductImage = () => {
   };
 
   const getallProductImageData = async (product_id) => {
-    const res = await axios.get("/getallImageProductData/" + product_id);
+    const res = await axios.get(`${process.env.SERVER_URL}/getallImageProductData/` + product_id);
     const data = res.data;
     setRows(data);
 
@@ -97,7 +97,7 @@ const AdminProductImage = () => {
       //   console.log(data);
 
       setIsLoading(true);
-      const res = await axios.post("/addProductImage", formData);
+      const res = await axios.post(`${process.env.SERVER_URL}/addProductImage`, formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -115,7 +115,7 @@ const AdminProductImage = () => {
 
   const handledeleteProductImage = async (id) => {
     try {
-      const res = await axios.post("/deleteImageProduct", { id });
+      const res = await axios.post(`${process.env.SERVER_URL}/deleteImageProduct`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -138,7 +138,7 @@ const AdminProductImage = () => {
         return false;
       }
 
-      const res = await axios.post("/makeDefaultImageProduct/"+ selectedValue + "/"+product_id);
+      const res = await axios.post(`${process.env.SERVER_URL}/makeDefaultImageProduct/`+ selectedValue + "/"+product_id);
 
       const data = await res.data.message;
       if (data === "success") {

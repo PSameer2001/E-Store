@@ -35,7 +35,7 @@ const MyOrderDetail = (props) => {
   };
 
   const getOrderProducts = async (orderid) => {
-    const res = await axios.get("/getOrderProducts/" + orderid);
+    const res = await axios.get(`${process.env.SERVER_URL}/getOrderProducts/` + orderid);
     const productdata = res.data;
     setProductData(productdata);
 
@@ -47,7 +47,7 @@ const MyOrderDetail = (props) => {
   };
 
   const handleSubmitReview = async (id) => {
-    const res = await axios.post("/addReview", {
+    const res = await axios.post(`${process.env.SERVER_URL}/addReview`, {
       id,
       productReview,
       email: user.email,

@@ -3,7 +3,7 @@ import axios from "axios";
 export const useSendOTP = () => {
   const sendotp = async (email) => {
     try {
-      const res = await axios.post("/SendOtp", {
+      const res = await axios.post(`${process.env.SERVER_URL}/SendOtp`, {
         email,
       });
       

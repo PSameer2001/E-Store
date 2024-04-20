@@ -32,7 +32,7 @@ const ProductDetail = (props) => {
   const [category, setCategory] = useState([]);
 
   const getallProductImageData = async (product_id) => {
-    const res = await axios.get("/getallImageProductData/" + product_id);
+    const res = await axios.get(`${process.env.SERVER_URL}/getallImageProductData/` + product_id);
     const data = res.data;
     if (data) {
       setProductImageData(data);
@@ -40,7 +40,7 @@ const ProductDetail = (props) => {
   };
 
   const getProductData = async (product_id) => {
-    const res = await axios.get("/getProductData/" + product_id);
+    const res = await axios.get(`${process.env.SERVER_URL}/getProductData/` + product_id);
     const data = res.data[0];
 
     if (data) {
@@ -49,7 +49,7 @@ const ProductDetail = (props) => {
   };
 
   const getProductReviewData = async (product_id) => {
-    const res = await axios.get("/getProductReviewData/" + product_id);
+    const res = await axios.get(`${process.env.SERVER_URL}/getProductReviewData/` + product_id);
     const data = res.data;
 
     if (data) {
@@ -58,7 +58,7 @@ const ProductDetail = (props) => {
   };
 
   const getallCategoryData = async (category_id) => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`${process.env.SERVER_URL}/getallCategoryData`);
     const data = res.data;
 
     if (data) {
@@ -81,7 +81,7 @@ const ProductDetail = (props) => {
 
   const handleCart = async () => {
     try {
-      const res = await axios.post("/addtoCart", {
+      const res = await axios.post(`${process.env.SERVER_URL}/addtoCart`, {
         email: user.email,
         address: user.address,
         quantity: quantity,
@@ -102,7 +102,7 @@ const ProductDetail = (props) => {
 
   const handleBuy = async () => {
     try {
-      const res = await axios.post("/addtoCart", {
+      const res = await axios.post(`${process.env.SERVER_URL}/addtoCart`, {
         email: user.email,
         address: user.address,
         quantity: quantity,
