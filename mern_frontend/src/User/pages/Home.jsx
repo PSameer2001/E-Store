@@ -49,7 +49,7 @@ const Home = (props) => {
       </section>
 
       {/* Contents */}
-      {sectiondata.map((section) => {
+      {sectiondata.forEach((section) => {
         return (
           <section className="contents" key={section.id}>
             {section.type === "1" && (
