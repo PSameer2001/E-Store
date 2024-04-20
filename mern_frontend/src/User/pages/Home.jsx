@@ -30,6 +30,8 @@ const Home = (props) => {
     getallSectionData();
   }, []);
 
+  console.log(sectiondata);
+
   return (
     <>
       {/* Carousel */}
