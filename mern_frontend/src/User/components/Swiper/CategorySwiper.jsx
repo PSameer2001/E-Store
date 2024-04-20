@@ -49,7 +49,7 @@ const CategorySwiper = () => {
             modules={[Autoplay, Pagination, Navigation, EffectCoverflow]}
             className="mySwiper"
           >
-            {data.forEach((data) => {
+            {data.map((data) => {
               return (
                 <SwiperSlide key={data.id}>
                   <Link to={`/category_product/${data.id}`}>
