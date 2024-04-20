@@ -92,7 +92,7 @@ const ContentSwiper = (props) => {
                     to={`/product_detail/${section.category_id}/${data.id}`}
                   >
                     <img
-                      src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
+                      src={`${process.env.IMAGE_URL}/products/${data.image_src}`}
                       alt=""
                     />
                   </Link>

@@ -241,7 +241,7 @@ const AdminProductImage = () => {
             <h4>Image</h4>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Image
-                src={`${process.env.PUBLIC_URL}/products/${imagedisplay}`}
+                src={`${process.env.IMAGE_URL}/products/${imagedisplay}`}
                 alt="Product"
                 style={{ width: "20rem", height: "20rem" }}
                 rounded
@@ -301,7 +301,7 @@ const AdminProductImage = () => {
                       <TableCell key={`img${row.id}`}>
                         <Image
                           onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.PUBLIC_URL}/products/${row["imageUrl"]}`}
+                          src={`${process.env.IMAGE_URL}/products/${row["imageUrl"]}`}
                           alt="Product"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

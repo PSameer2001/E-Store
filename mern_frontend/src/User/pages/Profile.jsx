@@ -214,7 +214,7 @@ const Profile = (props) => {
                         <div className="col-md-12">
                           <div className="profile_img">
                             <Image
-                              src={`${process.env.PUBLIC_URL}/profile/${image}`}
+                              src={`${process.env.IMAGE_URL}/profile/${image}`}
                               alt="Profile"
                               style={{ width: "8rem", height: "8rem" }}
                               rounded

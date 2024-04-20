@@ -320,7 +320,7 @@ const AdminCategory = () => {
             <h4>Image</h4>
             <div style={{display: "flex",justifyContent: "center"}}>
             <Image
-              src={`${process.env.PUBLIC_URL}/category/${imagedisplay}`}
+              src={`${process.env.IMAGE_URL}/category/${imagedisplay}`}
               alt="Category"
               style={{ width: "20rem", height: "20rem" }}
               rounded
@@ -398,7 +398,7 @@ const AdminCategory = () => {
                       })}
                       <TableCell key="image" align="center">
                         <Image onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.PUBLIC_URL}/category/${row["imageUrl"]}`}
+                          src={`${process.env.IMAGE_URL}/category/${row["imageUrl"]}`}
                           alt="Category"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

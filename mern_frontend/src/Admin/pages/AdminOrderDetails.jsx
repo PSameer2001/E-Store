@@ -105,7 +105,7 @@ const AdminOrderDetails = () => {
                       >
                         <TableCell key={`img${row.id}`} >
                         <Image
-                          src={`${process.env.PUBLIC_URL}/products/${row.image_src}`}
+                          src={`${process.env.IMAGE_URL}/products/${row.image_src}`}
                           alt={row.name}
                           style={{ width: "3rem", height: "3rem" }}
                           rounded
