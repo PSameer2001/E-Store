@@ -16,8 +16,8 @@ const CategorySwiper = () => {
 
   const getallCategoryData = async () => {
     const res = await axios.get("/getallCategoryData");
-    const data = res.data;
-    setData(data);
+    const resdata = res.data;
+    setData(resdata);
   };
 
   useEffect(() => {
