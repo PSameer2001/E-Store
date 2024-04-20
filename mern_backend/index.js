@@ -24,7 +24,13 @@ const port = process.env.PORT;
 app.set('view engine', 'ejs')
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+    origin: 'https://e-store-xobz.onrender.com'
+};
+
+app.use(cors(corsOptions));
+
 app.use(passport.initialize());
 
 // Routes

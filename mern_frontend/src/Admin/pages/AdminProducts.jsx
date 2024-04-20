@@ -89,13 +89,13 @@ const AdminProducts = () => {
   const [productImage, setProductImage] = useState();
 
   const getallProductData = async (category_id) => {
-    const res = await axios.get(`${process.env.SERVER_URL}/getallProductData/`+category_id);
+    const res = await axios.get(`/getallProductData/`+category_id);
     const data = res.data;
     setRows(data);
   };
 
   const getallCategoryData = async () => {
-    const res = await axios.get(`${process.env.SERVER_URL}/getallCategoryData`);
+    const res = await axios.get(`/getallCategoryData`);
     const data = res.data;
     setCategory(data);
   };
@@ -119,7 +119,7 @@ const AdminProducts = () => {
       // const data = Object.fromEntries(formData.entries());
 
       setIsLoading(true);
-      const res = await axios.post(`${process.env.SERVER_URL}/addProduct`, formData);
+      const res = await axios.post(`/addProduct`, formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -144,7 +144,7 @@ const AdminProducts = () => {
 
   const handledeleteProduct = async (id) => {
     try {
-      const res = await axios.post(`${process.env.SERVER_URL}/deleteProduct`, { id });
+      const res = await axios.post(`/deleteProduct`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -180,7 +180,7 @@ const AdminProducts = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`${process.env.SERVER_URL}/editProduct`, editproduct);
+      const res = await axios.post(`/editProduct`, editproduct);
       let message = res.data.message;
 
       if (message === "success") {

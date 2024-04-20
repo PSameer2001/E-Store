@@ -12,7 +12,7 @@ const Contact = (props) => {
   const [ticket, setIsTicket] = useState(false);
 
   const getactiveTicketData = async (email) => {
-    const res = await axios.get(`${process.env.SERVER_URL}/getactiveTicketData/` ,{
+    const res = await axios.get(`/getactiveTicketData/` ,{
       params : {
         email: email
       }
@@ -31,7 +31,7 @@ const Contact = (props) => {
       }
 
       setIsLoading(true);
-      const res = await axios.post(`${process.env.SERVER_URL}/createTicket`, {
+      const res = await axios.post(`/createTicket`, {
         email: user.email,
         message,
         subject,

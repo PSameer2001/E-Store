@@ -29,7 +29,7 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getUserData = async () => {
-      const res = await axios.get(`${process.env.SERVER_URL}/getUserData`);
+      const res = await axios.get(`/getUserData`);
       return res.data.userData;
     };
     getUserData()
