@@ -21,7 +21,7 @@ const Home = (props) => {
   const [sectiondata, setSectionData] = useState([]);
 
   const getallSectionData = async () => {
-    const res = await axios.get(`/getallSectionData`);
+    const res = await axios.get("/getallSectionData");
     const data = res.data;
     setSectionData(data);
   };
@@ -41,7 +41,7 @@ const Home = (props) => {
 
       {/* Categories */}
       <section className="categories">
-        <CategorySwiper />
+        {/* <CategorySwiper /> */}
       </section>
 
       {/* Gadgets */}
@@ -50,7 +50,7 @@ const Home = (props) => {
       </section>
 
       {/* Contents */}
-      {sectiondata.map((section) => {
+      {/* {sectiondata.map((section) => {
         return (
           <section className="contents" key={section.id}>
             {section.type === "1" && (
@@ -58,7 +58,7 @@ const Home = (props) => {
             )}
           </section>
         );
-      })}
+      })} */}
 
       {/* Services */}
       <section className="services">

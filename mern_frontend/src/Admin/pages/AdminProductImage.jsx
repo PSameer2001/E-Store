@@ -42,7 +42,7 @@ const AdminProductImage = () => {
   };
 
   const getallProductImageData = async (product_id) => {
-    const res = await axios.get(`/getallImageProductData/` + product_id);
+    const res = await axios.get("/getallImageProductData/" + product_id);
     const data = res.data;
     setRows(data);
 
@@ -97,7 +97,7 @@ const AdminProductImage = () => {
       //   console.log(data);
 
       setIsLoading(true);
-      const res = await axios.post(`/addProductImage`, formData);
+      const res = await axios.post("/addProductImage", formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -115,7 +115,7 @@ const AdminProductImage = () => {
 
   const handledeleteProductImage = async (id) => {
     try {
-      const res = await axios.post(`/deleteImageProduct`, { id });
+      const res = await axios.post("/deleteImageProduct", { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -138,7 +138,7 @@ const AdminProductImage = () => {
         return false;
       }
 
-      const res = await axios.post(`/makeDefaultImageProduct/`+ selectedValue + "/"+product_id);
+      const res = await axios.post("/makeDefaultImageProduct/"+ selectedValue + "/"+product_id);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -241,7 +241,7 @@ const AdminProductImage = () => {
             <h4>Image</h4>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Image
-                src={`${process.env.IMAGE_URL}/products/${imagedisplay}`}
+                src={`${process.env.PUBLIC_URL}/products/${imagedisplay}`}
                 alt="Product"
                 style={{ width: "20rem", height: "20rem" }}
                 rounded
@@ -301,7 +301,7 @@ const AdminProductImage = () => {
                       <TableCell key={`img${row.id}`}>
                         <Image
                           onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.IMAGE_URL}/products/${row["imageUrl"]}`}
+                          src={`${process.env.PUBLIC_URL}/products/${row["imageUrl"]}`}
                           alt="Product"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

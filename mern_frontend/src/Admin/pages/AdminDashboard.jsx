@@ -16,7 +16,7 @@ const AdminDashboard = () => {
   const [order, SetOrder] = useState([]);
 
   const getdashBoardData = async () => {
-    const res = await axios.get(`/getdashBoardData`);
+    const res = await axios.get("/getdashBoardData");
     SetDashboard(res.data.dashboard);
     SetContact(res.data.contactdata);
     SetOrder(res.data.orderdata);

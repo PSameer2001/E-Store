@@ -30,7 +30,7 @@ const EmailVerification = () => {
     } else {
       try {
         setIsLoading(true);
-        const res = await axios.post(`/sendVerificationLink`, { email });
+        const res = await axios.post("/sendVerificationLink", { email });
         let message = res.data.message;
 
         if (message === "success") {

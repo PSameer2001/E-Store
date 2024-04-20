@@ -23,7 +23,7 @@ const CategoryProduct = () => {
   const { category_id } = useParams();
 
   const getallProductData = async (category_id) => {
-    const res = await axios.get(`/getallProductData/` + category_id);
+    const res = await axios.get("/getallProductData/" + category_id);
     const data = res.data;
     setAllProducts(data);
     setProducts(data);
@@ -375,7 +375,7 @@ const CategoryProduct = () => {
                                     <div className="bg-image hover-zoom ripple rounded ripple-surface me-md-3 mb-3 mb-md-0">
                                       <img
                                         alt="img"
-                                        src={`${process.env.IMAGE_URL}/products/${data.image_src}`}
+                                        src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
                                         className="w-100"
                                       />
                                       <a href="#!">

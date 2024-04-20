@@ -38,14 +38,14 @@ const AdminOrderDetails = () => {
   };
 
   const getOrderProducts = async (orderid) => {
-    const res = await axios.get(`/getOrderProducts/` + orderid);
+    const res = await axios.get("/getOrderProducts/" + orderid);
     const productdata = res.data;
     setRows(productdata);
   };
 
   const [orders, setOrders] = useState({});
   const getOrders = async (orderid) => {
-    const res = await axios.get(`/getOrders/` + orderid);
+    const res = await axios.get("/getOrders/" + orderid);
     const orderdata = res.data;
     setOrders(orderdata);
   };
@@ -105,7 +105,7 @@ const AdminOrderDetails = () => {
                       >
                         <TableCell key={`img${row.id}`} >
                         <Image
-                          src={`${process.env.IMAGE_URL}/products/${row.image_src}`}
+                          src={`${process.env.PUBLIC_URL}/products/${row.image_src}`}
                           alt={row.name}
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

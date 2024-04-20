@@ -10,7 +10,7 @@ const TicketPage = (props) => {
   const [allticket, setAllTicket] = useState([]);
 
   const getuserTicketData = async (email) => {
-    const res = await axios.get(`/getuserTicketData`, {
+    const res = await axios.get("/getuserTicketData", {
       params: {
         email: email,
       },

@@ -32,7 +32,7 @@ const ProductDetail = (props) => {
   const [category, setCategory] = useState([]);
 
   const getallProductImageData = async (product_id) => {
-    const res = await axios.get(`/getallImageProductData/` + product_id);
+    const res = await axios.get("/getallImageProductData/" + product_id);
     const data = res.data;
     if (data) {
       setProductImageData(data);
@@ -40,7 +40,7 @@ const ProductDetail = (props) => {
   };
 
   const getProductData = async (product_id) => {
-    const res = await axios.get(`/getProductData/` + product_id);
+    const res = await axios.get("/getProductData/" + product_id);
     const data = res.data[0];
 
     if (data) {
@@ -49,7 +49,7 @@ const ProductDetail = (props) => {
   };
 
   const getProductReviewData = async (product_id) => {
-    const res = await axios.get(`/getProductReviewData/` + product_id);
+    const res = await axios.get("/getProductReviewData/" + product_id);
     const data = res.data;
 
     if (data) {
@@ -58,7 +58,7 @@ const ProductDetail = (props) => {
   };
 
   const getallCategoryData = async (category_id) => {
-    const res = await axios.get(`/getallCategoryData`);
+    const res = await axios.get("/getallCategoryData");
     const data = res.data;
 
     if (data) {
@@ -81,7 +81,7 @@ const ProductDetail = (props) => {
 
   const handleCart = async () => {
     try {
-      const res = await axios.post(`/addtoCart`, {
+      const res = await axios.post("/addtoCart", {
         email: user.email,
         address: user.address,
         quantity: quantity,
@@ -102,7 +102,7 @@ const ProductDetail = (props) => {
 
   const handleBuy = async () => {
     try {
-      const res = await axios.post(`/addtoCart`, {
+      const res = await axios.post("/addtoCart", {
         email: user.email,
         address: user.address,
         quantity: quantity,
@@ -133,7 +133,7 @@ const ProductDetail = (props) => {
                         return (
                           <Carousel.Item interval={3000} key={data.id}>
                             <img
-                              src={`${process.env.IMAGE_URL}/products/${data.imageUrl}`}
+                              src={`${process.env.PUBLIC_URL}/products/${data.imageUrl}`}
                               className="d-block w-100"
                               alt="..."
                             />
@@ -261,7 +261,7 @@ const ProductDetail = (props) => {
                             <div className="me-4">
                               <img
                                 className="img-fluid"
-                                src={`${process.env.IMAGE_URL}/profile/${data.image_src}`}
+                                src={`${process.env.PUBLIC_URL}/profile/${data.image_src}`}
                                 alt="UserProfile"
                                 style={{ width: "2rem", height: "2rem" }}
                               />
