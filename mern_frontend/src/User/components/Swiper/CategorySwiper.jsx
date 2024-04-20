@@ -54,7 +54,7 @@ const CategorySwiper = () => {
                 <SwiperSlide key={data.id}>
                   <Link to={`/category_product/${data.id}`}>
                     <img
-                      src={`${process.env.PUBLIC_URL}/category/${data.imageUrl}`}
+                      src={`${process.env.IMAGE_URL}/category/${data.imageUrl}`}
                       alt={data.name}
                     />
                   </Link>
