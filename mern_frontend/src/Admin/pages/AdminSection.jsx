@@ -76,14 +76,14 @@ const AdminSection = () => {
   };
 
   const getallSectionData = async () => {
-    const res = await axios.get("/getallSectionData");
+    const res = await axios.get(`/getallSectionData`);
     const data = res.data;
     setRows(data);
   };
 
   const [category, setCategory] = useState([]);
   const getallCategoryData = async () => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`/getallCategoryData`);
     const data = res.data;
     setCategory(data);
   };
@@ -92,7 +92,7 @@ const AdminSection = () => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      const res = await axios.post("/addSection", sectiondata);
+      const res = await axios.post(`/addSection`, sectiondata);
       let message = res.data.message;
 
       if (message === "success") {
@@ -114,7 +114,7 @@ const AdminSection = () => {
 
   const handledeleteSection = async (id) => {
     try {
-      const res = await axios.post("/deleteSection", { id });
+      const res = await axios.post(`/deleteSection`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -147,7 +147,7 @@ const AdminSection = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post("/editSection", editsectiondata);
+      const res = await axios.post(`/editSection`, editsectiondata);
       let message = res.data.message;
 
       if (message === "success") {

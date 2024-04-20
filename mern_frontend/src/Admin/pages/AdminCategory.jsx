@@ -87,7 +87,7 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post("/addCategory", formData);
+      const res = await axios.post(`/addCategory`, formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -103,7 +103,7 @@ const AdminCategory = () => {
 
   const handledeleteCategory = async (id) => {
     try {
-      const res = await axios.post("/deleteCategory", { id });
+      const res = await axios.post(`/deleteCategory`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -118,7 +118,7 @@ const AdminCategory = () => {
   };
 
   const getallCategoryData = async () => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`/getallCategoryData`);
     const data = res.data;
     setRows(data);
   };
@@ -162,7 +162,7 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post("/editCategory", formData);
+      const res = await axios.post(`/editCategory`, formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -320,7 +320,7 @@ const AdminCategory = () => {
             <h4>Image</h4>
             <div style={{display: "flex",justifyContent: "center"}}>
             <Image
-              src={`${process.env.PUBLIC_URL}/category/${imagedisplay}`}
+              src={`${process.env.IMAGE_URL}/category/${imagedisplay}`}
               alt="Category"
               style={{ width: "20rem", height: "20rem" }}
               rounded
@@ -398,7 +398,7 @@ const AdminCategory = () => {
                       })}
                       <TableCell key="image" align="center">
                         <Image onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.PUBLIC_URL}/category/${row["imageUrl"]}`}
+                          src={`${process.env.IMAGE_URL}/category/${row["imageUrl"]}`}
                           alt="Category"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

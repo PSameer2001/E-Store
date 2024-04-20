@@ -35,7 +35,7 @@ const MyOrderDetail = (props) => {
   };
 
   const getOrderProducts = async (orderid) => {
-    const res = await axios.get("/getOrderProducts/" + orderid);
+    const res = await axios.get(`/getOrderProducts/` + orderid);
     const productdata = res.data;
     setProductData(productdata);
 
@@ -47,7 +47,7 @@ const MyOrderDetail = (props) => {
   };
 
   const handleSubmitReview = async (id) => {
-    const res = await axios.post("/addReview", {
+    const res = await axios.post(`/addReview`, {
       id,
       productReview,
       email: user.email,
@@ -143,7 +143,7 @@ const MyOrderDetail = (props) => {
                               >
                                 <img
                                   className="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
-                                  src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
+                                  src={`${process.env.IMAGE_URL}/products/${data.image_src}`}
                                   alt={data.name}
                                   width="135"
                                   height="135"

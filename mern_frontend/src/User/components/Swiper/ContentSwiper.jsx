@@ -25,13 +25,13 @@ const ContentSwiper = (props) => {
   const [category, setCategory] = useState([]);
 
   const getallProductData = async (category_id) => {
-    const res = await axios.get("/getallProductData/" + category_id);
+    const res = await axios.get(`/getallProductData/` + category_id);
     const data = res.data;
     setProductData(data);
   };
 
   const getallCategoryData = async (category_id) => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`/getallCategoryData`);
     const data = res.data;
     const category = data.filter((data) => data.id === category_id)[0];
     setCategory(category);
@@ -44,7 +44,7 @@ const ContentSwiper = (props) => {
 
   const handleCart = async (productid) => {
     try {
-      const res = await axios.post("/addtoCart", {
+      const res = await axios.post(`/addtoCart`, {
         email: authUser.email,
         address: authUser.address,
         quantity: 1,
@@ -92,7 +92,7 @@ const ContentSwiper = (props) => {
                     to={`/product_detail/${section.category_id}/${data.id}`}
                   >
                     <img
-                      src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
+                      src={`${process.env.IMAGE_URL}/products/${data.image_src}`}
                       alt=""
                     />
                   </Link>
