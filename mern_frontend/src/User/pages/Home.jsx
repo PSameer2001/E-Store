@@ -21,7 +21,7 @@ const Home = (props) => {
   const [sectiondata, setSectionData] = useState([]);
 
   const getallSectionData = async () => {
-    const res = await axios.get("/getallSectionData");
+    const res = await axios.get("https://e-store-xwa9.onrender.com/getallSectionData");
     const data = res.data;
     setSectionData(data);
   };
