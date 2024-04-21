@@ -87,7 +87,7 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post("/addCategory", formData);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/addCategory`, formData);
       let message = res.data.message;
 
       if (message === "success") {
@@ -103,7 +103,7 @@ const AdminCategory = () => {
 
   const handledeleteCategory = async (id) => {
     try {
-      const res = await axios.post("/deleteCategory", { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/deleteCategory`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -118,7 +118,7 @@ const AdminCategory = () => {
   };
 
   const getallCategoryData = async () => {
-    const res = await axios.get("/getallCategoryData");
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getallCategoryData`);
     const data = res.data;
     setRows(data);
   };
@@ -162,7 +162,7 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post("/editCategory", formData);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/editCategory`, formData);
       let message = res.data.message;
 
       if (message === "success") {

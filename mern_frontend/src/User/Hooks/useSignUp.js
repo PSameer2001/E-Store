@@ -3,7 +3,7 @@ import axios from "axios";
 export const useSignup = () => {
   const signup = async (name, email, password, cpassword) => {
     try {
-      const res = await axios.post("/signup", {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/signup`, {
         name,
         email,
         password,

@@ -38,14 +38,14 @@ const AdminOrderDetails = () => {
   };
 
   const getOrderProducts = async (orderid) => {
-    const res = await axios.get("/getOrderProducts/" + orderid);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getOrderProducts/${orderid}`);
     const productdata = res.data;
     setRows(productdata);
   };
 
   const [orders, setOrders] = useState({});
   const getOrders = async (orderid) => {
-    const res = await axios.get("/getOrders/" + orderid);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getOrders/${orderid}`);
     const orderdata = res.data;
     setOrders(orderdata);
   };

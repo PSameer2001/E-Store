@@ -35,20 +35,22 @@ const AdminProductImage = () => {
     setImageDisplay(img);
     handleImageShow();
   };
-  
+
   const [selectedValue, setSelectedValue] = useState("");
   const handleRadioChange = (value) => {
     setSelectedValue(value);
   };
 
   const getallProductImageData = async (product_id) => {
-    const res = await axios.get("/getallImageProductData/" + product_id);
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/getallImageProductData/${product_id}`
+    );
     const data = res.data;
     setRows(data);
 
     const filterData = data.filter((data) => data.selected_img === "1");
-    
-    if(filterData.length !== 0){
+
+    if (filterData.length !== 0) {
       setSelectedValue(filterData[0].id);
     }
   };
@@ -97,7 +99,10 @@ const AdminProductImage = () => {
       //   console.log(data);
 
       setIsLoading(true);
-      const res = await axios.post("/addProductImage", formData);
+      const res = await axios.post(
+        `/addProductImage`,
+        formData
+      );
       let message = res.data.message;
 
       if (message === "success") {
@@ -115,7 +120,10 @@ const AdminProductImage = () => {
 
   const handledeleteProductImage = async (id) => {
     try {
-      const res = await axios.post("/deleteImageProduct", { id });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/deleteImageProduct`,
+        { id }
+      );
 
       const data = await res.data.message;
       if (data === "success") {
@@ -131,14 +139,16 @@ const AdminProductImage = () => {
 
   const handleDefaultImage = async (selectedValue, product_id) => {
     try {
-      if(selectedValue === undefined){
+      if (selectedValue === undefined) {
         toast.error("Please Select Image", {
           duration: 1500,
         });
         return false;
       }
 
-      const res = await axios.post("/makeDefaultImageProduct/"+ selectedValue + "/"+product_id);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/makeDefaultImageProduct/${selectedValue}/${product_id}`
+      );
 
       const data = await res.data.message;
       if (data === "success") {
@@ -150,7 +160,7 @@ const AdminProductImage = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const style = {
     position: "absolute",
@@ -191,8 +201,12 @@ const AdminProductImage = () => {
 
         <Button
           variant="primary"
-          onClick={() => handleDefaultImage(selectedValue,product_id)}
-          style={{ backgroundColor: "#1976d2", color: "#fff", marginLeft: "5px" }}
+          onClick={() => handleDefaultImage(selectedValue, product_id)}
+          style={{
+            backgroundColor: "#1976d2",
+            color: "#fff",
+            marginLeft: "5px",
+          }}
         >
           Make Default Image
         </Button>

@@ -235,7 +235,7 @@ const AddToCart = (props) => {
 
   const initPay = (data) => {
     const options = {
-      key: process.env.RAZOR_KEY_Id,
+      key: process.env.REACT_APP_RAZOR_KEY_Id,
       amount: data.amount,
       currency: data.currency,
       name: "E-Store",
