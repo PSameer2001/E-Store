@@ -22,14 +22,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.use(
-  "/api",
-  createProxyMiddleware({
-    target: "https://e-store-cvz4.onrender.com",
-    changeOrigin: true,
-  })
-);
-
 app.use(cors());
 app.set("view engine", "ejs");
 app.use(cookieParser());
