@@ -16,6 +16,8 @@ import {
 import axios from "axios";
 import Loader from "../components/Loader";
 import Image from "react-bootstrap/Image";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDB } from "../../config/firebase_config";
 
 const Profile = (props) => {
   const authUser = props.authUser;
@@ -145,9 +147,6 @@ const Profile = (props) => {
   const handlefileUpload = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    var formData = new FormData();
-    formData.append("imageUrl", file);
-    formData.append("email", currentUser.email);
 
     if (file != null) {
       // const filereader = new FileReader();
@@ -161,15 +160,24 @@ const Profile = (props) => {
         toast.error("Only JPG, PNG and PNG file type are allowed", { duration: 1500 });
         return false;
       }
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateProfilePhoto`, formData);
-      let message = res.data.message;
 
-      if (message === "success") {
-        setImage(res.data.file);
-        toast.success("Update Successful", { duration: 1500 });
-      }else{
-        toast.error("Something Went Wrong", { duration: 1500 });
-      }
+      const imageRef = ref(imageDB, `/profile/${file.name}`);
+      uploadBytes(imageRef, file).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then(async (url) => {
+          const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/updateProfilePhoto`, {
+            email : currentUser.email,
+            imageUrl: url
+          });
+          let message = res.data.message;
+    
+          if (message === "success") {
+            setImage(res.data.file);
+            toast.success("Update Successful", { duration: 1500 });
+          }else{
+            toast.error("Something Went Wrong", { duration: 1500 });
+          }
+        });
+      });
     }
   };
 
@@ -214,7 +222,7 @@ const Profile = (props) => {
                         <div className="col-md-12">
                           <div className="profile_img">
                             <Image
-                              src={`${process.env.PUBLIC_URL}/profile/${image}`}
+                              src={`${image}`}
                               alt="Profile"
                               style={{ width: "8rem", height: "8rem" }}
                               rounded

@@ -302,15 +302,15 @@ const updateUser = async (req, res) => {
 
 // Update User
 const updateProfilePhoto = async (req, res) => {
-    const { email } = req.body;
+    const { email, imageUrl } = req.body;
     const findUser = await User.findOne({ email });
     const update = await User.findOneAndUpdate(
       { _id: findUser.id },
-      { $set: { imageUrl: req.file.filename } }
+      { $set: { imageUrl: imageUrl } }
     );
 
     if (update) {
-      return res.json({ message: "success", file:req.file.filename });
+      return res.json({ message: "success", file:imageUrl });
     }
 };
 

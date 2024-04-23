@@ -7,16 +7,7 @@ const fs = require("fs");
 // Add Product
 const addProduct = async (req, res) => {
   try {
-    const imageUrl = req.files;
-    const imageArr = [];
-
-    imageUrl.forEach((file) => {
-      imageArr.push(file.filename);
-    });
-
-    const { name, brand, description, category, oldprice, price } = JSON.parse(
-      req.body.data
-    );
+    const { name, brand, description, category, oldprice, price, imagefile } = req.body;
 
     const productDetail = new Product({
       name,
@@ -30,7 +21,7 @@ const addProduct = async (req, res) => {
     await productDetail.save().then((savedDoc) => {
       var id = savedDoc.id;
 
-      imageArr.forEach(async (img) => {
+      imagefile.forEach(async (img) => {
         await new ProductImageModel({
           product_id: id,
           imageUrl: img,
@@ -46,15 +37,9 @@ const addProduct = async (req, res) => {
 // Add Product Image
 const addProductImage = async (req, res) => {
   try {
-    const { Id } = req.body;
-    const imageUrl = req.files;
-    const imageArr = [];
-
-    imageUrl.forEach((file) => {
-      imageArr.push(file.filename);
-    });
-
-    imageArr.forEach(async (img) => {
+    const { Id,imageUrl } = req.body;
+    
+    imageUrl.forEach(async (img) => {
       await new ProductImageModel({
         product_id: Id,
         imageUrl: img,
@@ -190,17 +175,7 @@ const getallImageProductData = async (req, res) => {
 // Delete Product
 const deleteProduct = async (req, res) => {
   const { id } = req.body;
-
-  const dir = "../mern_frontend/public/products";
-
-  const productImageData = await ProductImageModel.find({ product_id: id });
   await ProductImageModel.deleteMany({ product_id: id });
-
-  productImageData.forEach((data) => {
-    if (fs.existsSync(dir + "/" + data.imageUrl)) {
-      fs.unlinkSync(dir + "/" + data.imageUrl);
-    }
-  });
 
   Product.deleteOne({ _id: id })
     .then(function () {
@@ -254,13 +229,7 @@ const editProduct = async (req, res) => {
 // Delete Image
 const deleteImageProduct = async (req, res) => {
   const { id } = req.body;
-  const dir = "../mern_frontend/public/products";
 
-  const productImageData = await ProductImageModel.findOne({ _id: id });
-
-  if (fs.existsSync(dir + "/" + productImageData["imageUrl"])) {
-    fs.unlinkSync(dir + "/" + productImageData["imageUrl"]);
-  }
   ProductImageModel.deleteOne({ _id: id })
     .then(function () {
       return res.status(201).json({ message: "success" });
@@ -303,28 +272,30 @@ const makeDefaultImageProduct = async (req, res) => {
 const getProductReviewData = async (req, res) => {
   const { product_id } = req.params;
   try {
-    Product.findOne({ _id: product_id }).then(async (data) => {
-      const productdata = [];
-      await Promise.all(
-        data.review.map(async (data) => {
-          var findUser = await User.findOne({ _id: data.user_id });
+    Product.findOne({ _id: product_id })
+      .then(async (data) => {
+        const productdata = [];
+        await Promise.all(
+          data.review.map(async (data) => {
+            var findUser = await User.findOne({ _id: data.user_id });
 
-          var productsData = {
-            user_id: data.user_id,
-            email: data.email,
-            name: data.name,
-            review: data.review,
-            date: data.date,
-            image_src: findUser.imageUrl,
-          };
-          productdata.push(productsData);
-        })
-      );
+            var productsData = {
+              user_id: data.user_id,
+              email: data.email,
+              name: data.name,
+              review: data.review,
+              date: data.date,
+              image_src: findUser.imageUrl,
+            };
+            productdata.push(productsData);
+          })
+        );
 
-      return productdata;
-    }).then((productreview) => {
-      return res.json(productreview);
-    })
+        return productdata;
+      })
+      .then((productreview) => {
+        return res.json(productreview);
+      });
   } catch (error) {
     console.log(error);
     return res.json({ message: error });
@@ -334,7 +305,7 @@ const getProductReviewData = async (req, res) => {
 // get every product
 const getAllProduct = async (req, res) => {
   try {
-    Product.find({ })
+    Product.find({})
       .sort({
         name: -1,
       })
@@ -371,7 +342,7 @@ const getAllProduct = async (req, res) => {
                 const quantity = productData ? productData.quantity : 0;
                 product_quantity = product_quantity + quantity;
               });
-            } 
+            }
 
             var productsData = {
               id: data._id,
@@ -395,7 +366,7 @@ const getAllProduct = async (req, res) => {
   } catch (error) {
     return res.json({ message: error });
   }
-}
+};
 
 module.exports = {
   addProduct,
@@ -408,5 +379,5 @@ module.exports = {
   makeDefaultImageProduct,
   getProductData,
   getProductReviewData,
-  getAllProduct
+  getAllProduct,
 };

@@ -133,7 +133,7 @@ const ProductDetail = (props) => {
                         return (
                           <Carousel.Item interval={3000} key={data.id}>
                             <img
-                              src={`${process.env.PUBLIC_URL}/products/${data.imageUrl}`}
+                              src={`${data.imageUrl}`}
                               className="d-block w-100"
                               alt="..."
                             />
@@ -261,7 +261,7 @@ const ProductDetail = (props) => {
                             <div className="me-4">
                               <img
                                 className="img-fluid"
-                                src={`${process.env.PUBLIC_URL}/profile/${data.image_src}`}
+                                src={`${data.image_src}`}
                                 alt="UserProfile"
                                 style={{ width: "2rem", height: "2rem" }}
                               />

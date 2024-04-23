@@ -72,10 +72,12 @@ const loginAdmin = async (req, res) => {
     if (findUser && (await bcrypt.compare(password, findUser.password))) {
       if (findUser.isAdmin || findUser.isSuperAdmin) {
         const token = generateToken(findUser?._id);
-        res.cookie("jwtAdminToken", token, {
-          httpOnly: true,
-          maxAge: 24 * 60 * 60 * 1000,
-        });
+      
+          res.cookie("jwtAdminToken", token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
+          });
+       
 
         return res.json({
           authAdmin: {

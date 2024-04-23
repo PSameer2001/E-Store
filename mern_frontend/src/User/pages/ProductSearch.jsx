@@ -47,7 +47,7 @@ const ProductSearch = () => {
                                     <div className="bg-image hover-zoom ripple rounded ripple-surface me-md-3 mb-3 mb-md-0">
                                       <img
                                         alt="img"
-                                        src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
+                                        src={`${data.image_src}`}
                                         className="w-100"
                                       />
                                       <a href="#!">

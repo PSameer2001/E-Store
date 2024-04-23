@@ -6,8 +6,8 @@ const { storeImage } = require('../components/imageStorage');
 const productRouter = Router();
 
 // Post method
-productRouter.post("/addProduct", verifyAdminToken,storeImage('products').array('productImage', 10), product.addProduct);
-productRouter.post("/addProductImage", verifyAdminToken,storeImage('products').array('productImage', 10), product.addProductImage);
+productRouter.post("/addProduct",verifyAdminToken, product.addProduct);
+productRouter.post("/addProductImage", verifyAdminToken, product.addProductImage);
 productRouter.post("/editProduct", verifyAdminToken, product.editProduct);
 productRouter.post("/deleteProduct", verifyAdminToken, product.deleteProduct);
 productRouter.post("/deleteImageProduct", verifyAdminToken, product.deleteImageProduct);

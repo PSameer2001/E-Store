@@ -20,8 +20,9 @@ import toast from "react-hot-toast";
 import { ButtonGroup, Tooltip } from "@mui/material";
 import Image from "react-bootstrap/Image";
 import { Link } from "react-router-dom";
-
 import LayersIcon from "@mui/icons-material/Layers";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDB } from "../../config/firebase_config";
 
 const AdminCategory = () => {
   const [page, setPage] = useState(0);
@@ -58,12 +59,13 @@ const AdminCategory = () => {
   const handleImageDisplay = (img) => {
     setImageDisplay(img);
     handleImageShow();
-  }
+  };
 
   const [loading, setIsLoading] = useState(false);
 
   const [name, setName] = useState("");
   const [imageUrl, setimageUrl] = useState();
+
   const [editdata, seteditData] = useState({
     editname: "",
     editId: "",
@@ -73,10 +75,6 @@ const AdminCategory = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      var formData = new FormData();
-      formData.append("imageUrl", imageUrl);
-      formData.append("name", name);
-
       const allowedType = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
       if (!allowedType.includes(imageUrl?.type)) {
@@ -87,15 +85,26 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/addCategory`, formData);
-      let message = res.data.message;
+      const imageRef = ref(imageDB, `/category/${imageUrl.name}`);
+      uploadBytes(imageRef, imageUrl).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then(async (url) => {
+          const res = await axios.post(
+            `${process.env.REACT_APP_SERVER_URL}/addCategory`,
+            {
+              name: name,
+              imageUrl: url,
+            }
+          );
+          let message = res.data.message;
 
-      if (message === "success") {
-        setIsLoading(false);
-        getallCategoryData();
-        handleClose();
-        toast.success("Added Successful", { duration: 1500 });
-      }
+          if (message === "success") {
+            setIsLoading(false);
+            getallCategoryData();
+            handleClose();
+            toast.success("Added Successful", { duration: 1500 });
+          }
+        });
+      });
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +112,10 @@ const AdminCategory = () => {
 
   const handledeleteCategory = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/deleteCategory`, { id });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/deleteCategory`,
+        { id }
+      );
 
       const data = await res.data.message;
       if (data === "success") {
@@ -118,7 +130,9 @@ const AdminCategory = () => {
   };
 
   const getallCategoryData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getallCategoryData`);
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/getallCategoryData`
+    );
     const data = res.data;
     setRows(data);
   };
@@ -140,11 +154,6 @@ const AdminCategory = () => {
     try {
       const { editname: name, editId } = editdata;
 
-      var formData = new FormData();
-      formData.append("imageUrl", editimageUrl);
-      formData.append("name", name);
-      formData.append("editId", editId);
-
       if (editimageUrl !== null && editimageUrl !== "" && editimageUrl) {
         const allowedType = [
           "image/jpeg",
@@ -162,18 +171,52 @@ const AdminCategory = () => {
       }
 
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/editCategory`, formData);
-      let message = res.data.message;
+      if (editimageUrl) {
+        const imageRef = ref(imageDB, `/category/${editimageUrl.name}`);
+        uploadBytes(imageRef, editimageUrl).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then(async (url) => {
+            const res = await axios.post(
+              `${process.env.REACT_APP_SERVER_URL}/editCategory`,
+              {
+                imageUrl: url,
+                name: name,
+                editId: editId,
+              }
+            );
 
-      if (message === "success") {
-        setIsLoading(false);
-        getallCategoryData();
-        handleEditClose();
-        seteditData({
-          editname: "",
-          editId: "",
+            var message = res.data.message;
+            if (message === "success") {
+              setIsLoading(false);
+              getallCategoryData();
+              handleEditClose();
+              seteditData({
+                editname: "",
+                editId: "",
+              });
+              toast.success("Edited Successful", { duration: 1500 });
+            }
+          });
         });
-        toast.success("Edited Successful", { duration: 1500 });
+      } else {
+        const res = await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/editCategory`,
+          {
+            name: name,
+            editId: editId,
+          }
+        );
+
+        var message = res.data.message;
+        if (message === "success") {
+          setIsLoading(false);
+          getallCategoryData();
+          handleEditClose();
+          seteditData({
+            editname: "",
+            editId: "",
+          });
+          toast.success("Edited Successful", { duration: 1500 });
+        }
       }
     } catch (error) {
       console.log(error);
@@ -318,13 +361,13 @@ const AdminCategory = () => {
         >
           <Box sx={style}>
             <h4>Image</h4>
-            <div style={{display: "flex",justifyContent: "center"}}>
-            <Image
-              src={`${process.env.PUBLIC_URL}/category/${imagedisplay}`}
-              alt="Category"
-              style={{ width: "20rem", height: "20rem" }}
-              rounded
-            />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Image
+                src={`${imagedisplay}`}
+                alt="Category"
+                style={{ width: "20rem", height: "20rem" }}
+                rounded
+              />
             </div>
           </Box>
         </Modal>
@@ -397,8 +440,9 @@ const AdminCategory = () => {
                         );
                       })}
                       <TableCell key="image" align="center">
-                        <Image onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.PUBLIC_URL}/category/${row["imageUrl"]}`}
+                        <Image
+                          onClick={() => handleImageDisplay(row["imageUrl"])}
+                          src={`${row["imageUrl"]}`}
                           alt="Category"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

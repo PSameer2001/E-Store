@@ -4,10 +4,10 @@ const fs = require("fs");
 // Add Category
 const addCategory = async (req, res) => {
   try {
-    const { name } = req.body;
+    const { name, imageUrl } = req.body;
     const categoryDetail = new Category({
       name: name,
-      imageUrl: req.file.filename,
+      imageUrl: imageUrl,
     });
 
     await categoryDetail.save();
@@ -45,10 +45,6 @@ const getallCategoryData = async (req, res) => {
 const deleteCategory = async (req, res) => {
   const { id } = req.body;
 
-  const dir = "../mern_frontend/public/category";
-  const categoryData = await Category.findOne({ _id: id });
-  fs.unlinkSync(dir + "/" + categoryData["imageUrl"]);
-
   Category.deleteOne({ _id: id })
     .then(function () {
       return res.status(201).json({ message: "success" });
@@ -61,7 +57,7 @@ const deleteCategory = async (req, res) => {
 // Update Category
 const editCategory = async (req, res) => {
   try {
-    const { name, editId } = req.body;
+    const { name, editId, imageUrl } = req.body;
     const findCategory = await Category.findOne({ _id: editId });
 
     const update = await Category.findOneAndUpdate(
@@ -73,12 +69,12 @@ const editCategory = async (req, res) => {
       }
     );
 
-    if (req.file) {
+    if (imageUrl) {
       await Category.findOneAndUpdate(
         { _id: findCategory._id },
         {
           $set: {
-            imageUrl: req.file.filename,
+            imageUrl: imageUrl,
           },
         }
       );

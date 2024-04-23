@@ -19,6 +19,8 @@ import toast from "react-hot-toast";
 import { ButtonGroup } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import Image from "react-bootstrap/esm/Image";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDB } from "../../config/firebase_config";
 
 const AdminProductImage = () => {
   let { productid, category_id } = useParams();
@@ -84,8 +86,6 @@ const AdminProductImage = () => {
       e.preventDefault();
       const allowedType = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
-      var formData = new FormData();
-      formData.append("Id", product_id);
       for (let file of productImage) {
         if (!allowedType.includes(file?.type)) {
           toast.error("Only JPG, PNG and PNG file type are allowed", {
@@ -93,15 +93,28 @@ const AdminProductImage = () => {
           });
           return false;
         }
-        formData.append("productImage", file);
       }
       //   const data = Object.fromEntries(formData.entries());
       //   console.log(data);
 
+      var imageUrl = [];
+      const uploadPromises = Object.keys(productImage).map(async (key) => {
+        const storageRef = ref(imageDB, `products/${productImage[key].name}`);
+        const uploadbytes = await uploadBytes(storageRef, productImage[key]);
+        const url = await getDownloadURL(uploadbytes.ref);
+        imageUrl.push(url);
+        return url;
+      });
+
+      await Promise.all(uploadPromises);
+
       setIsLoading(true);
       const res = await axios.post(
         `/addProductImage`,
-        formData
+        {
+          Id: product_id,
+          imageUrl: imageUrl
+        }
       );
       let message = res.data.message;
 
@@ -255,7 +268,7 @@ const AdminProductImage = () => {
             <h4>Image</h4>
             <div style={{ display: "flex", justifyContent: "center" }}>
               <Image
-                src={`${process.env.PUBLIC_URL}/products/${imagedisplay}`}
+                src={`${imagedisplay}`}
                 alt="Product"
                 style={{ width: "20rem", height: "20rem" }}
                 rounded
@@ -315,7 +328,7 @@ const AdminProductImage = () => {
                       <TableCell key={`img${row.id}`}>
                         <Image
                           onClick={() => handleImageDisplay(row["imageUrl"])}
-                          src={`${process.env.PUBLIC_URL}/products/${row["imageUrl"]}`}
+                          src={`${row["imageUrl"]}`}
                           alt="Product"
                           style={{ width: "3rem", height: "3rem" }}
                           rounded

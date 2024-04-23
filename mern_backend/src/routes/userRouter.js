@@ -13,7 +13,7 @@ userRouter.post('/SendOtp', user.SendOtp);
 userRouter.post('/forgetPassword', user.forgetPassword);
 userRouter.post('/sendVerificationLink', user.SendEmailVerification);
 userRouter.post('/updateUser', user.updateUser);
-userRouter.post('/updateProfilePhoto',storeImage('profile').single('imageUrl'), user.updateProfilePhoto);
+userRouter.post('/updateProfilePhoto', user.updateProfilePhoto);
 userRouter.post('/updatePassword', user.updatePassword);
 
 // Get method

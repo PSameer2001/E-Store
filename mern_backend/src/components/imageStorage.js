@@ -20,7 +20,7 @@ const checkFileType = function (file, cb) {
 const imageStorage = (folder) => {
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, "../mern_frontend/public/" + folder + "/");
+      cb(null, "/src/images/" + folder + "/");
     },
     filename: (req, file, cb) => {
       cb(

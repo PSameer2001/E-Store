@@ -324,7 +324,7 @@ const AddToCart = (props) => {
                           <div className="row">
                             <div className="imgbox1 col-md-3 col-sm-4 col-11 d-flex justify-content-center align-items-center shadow product_img">
                               <img
-                                src={`${process.env.PUBLIC_URL}/products/${prod.image_src}`}
+                                src={`${prod.image_src}`}
                                 className="img-fluid"
                                 alt="cart img"
                               />

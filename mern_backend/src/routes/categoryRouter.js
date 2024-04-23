@@ -4,10 +4,10 @@ const { verifyAdminToken } = require('../middlewares/adminAuthMiddleware');
 const { storeImage } = require('../components/imageStorage');
 
 const categoryRouter = Router();
-
+// storeImage('category').single('imageUrl')
 // Post method
-categoryRouter.post("/addCategory", verifyAdminToken, storeImage('category').single('imageUrl'), category.addCategory);
-categoryRouter.post("/editCategory", verifyAdminToken, storeImage('category').single('imageUrl'), category.editCategory);
+categoryRouter.post("/addCategory",verifyAdminToken, category.addCategory);
+categoryRouter.post("/editCategory",verifyAdminToken, category.editCategory);
 categoryRouter.post("/deleteCategory", verifyAdminToken, category.deleteCategory);
 
 

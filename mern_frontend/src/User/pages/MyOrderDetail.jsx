@@ -143,7 +143,7 @@ const MyOrderDetail = (props) => {
                               >
                                 <img
                                   className="img-fluid  my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0"
-                                  src={`${process.env.PUBLIC_URL}/products/${data.image_src}`}
+                                  src={`${data.image_src}`}
                                   alt={data.name}
                                   width="135"
                                   height="135"

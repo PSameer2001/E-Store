@@ -18,6 +18,8 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { ButtonGroup, Tooltip } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDB } from "../../config/firebase_config";
 
 const AdminProducts = () => {
   const [page, setPage] = useState(0);
@@ -89,13 +91,17 @@ const AdminProducts = () => {
   const [productImage, setProductImage] = useState();
 
   const getallProductData = async (category_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getallProductData/${category_id}`);
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/getallProductData/${category_id}`
+    );
     const data = res.data;
     setRows(data);
   };
 
   const getallCategoryData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getallCategoryData`);
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/getallCategoryData`
+    );
     const data = res.data;
     setCategory(data);
   };
@@ -105,8 +111,6 @@ const AdminProducts = () => {
       e.preventDefault();
       const allowedType = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
 
-      var formData = new FormData();
-      formData.append("data", JSON.stringify(product));
       for (let file of productImage) {
         if (!allowedType.includes(file?.type)) {
           toast.error("Only JPG, PNG and PNG file type are allowed", {
@@ -114,12 +118,33 @@ const AdminProducts = () => {
           });
           return false;
         }
-        formData.append("productImage", file);
       }
+
+      var iamgeUrl = [];
+      const uploadPromises = Object.keys(productImage).map(async (key) => {
+        const storageRef = ref(imageDB, `products/${productImage[key].name}`);
+        const uploadbytes = await uploadBytes(storageRef, productImage[key]);
+        const url = await getDownloadURL(uploadbytes.ref);
+        iamgeUrl.push(url);
+        return url;
+      });
+
+      await Promise.all(uploadPromises);
       // const data = Object.fromEntries(formData.entries());
 
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/addProduct`, formData);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/addProduct`,
+        {
+          name: product.name,
+          brand: product.brand,
+          description: product.description,
+          price: product.price,
+          oldprice: product.oldprice,
+          category: product.category,
+          imagefile: iamgeUrl,
+        }
+      );
       let message = res.data.message;
 
       if (message === "success") {
@@ -144,7 +169,10 @@ const AdminProducts = () => {
 
   const handledeleteProduct = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/deleteProduct`, { id });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/deleteProduct`,
+        { id }
+      );
 
       const data = await res.data.message;
       if (data === "success") {
@@ -180,7 +208,10 @@ const AdminProducts = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/editProduct`, editproduct);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/editProduct`,
+        editproduct
+      );
       let message = res.data.message;
 
       if (message === "success") {
@@ -234,7 +265,9 @@ const AdminProducts = () => {
         }}
       >
         {/* Add Products */}
-        <Link to={`/admin/category`} className="return">Return</Link>
+        <Link to={`/admin/category`} className="return">
+          Return
+        </Link>
         <Button
           variant="primary"
           onClick={handleShow}
@@ -252,8 +285,7 @@ const AdminProducts = () => {
           <Box sx={style}>
             <h4>Add Product</h4>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-              
-            <div className="form-group">
+              <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">Category</label>
                 <select
                   className="form-control"
@@ -381,8 +413,7 @@ const AdminProducts = () => {
           <Box sx={style}>
             <h4>Edit Category</h4>
             <form onSubmit={handleEditSubmit} encType="multipart/form-data">
-              
-            <div className="form-group">
+              <div className="form-group">
                 <label htmlFor="exampleFormControlSelect1">Category</label>
                 <select
                   className="form-control"
@@ -534,7 +565,9 @@ const AdminProducts = () => {
                           </Button>
 
                           <Tooltip title="Image Edit">
-                            <Link to={`/admin/productImage/${category_id}/${row.id}`}>
+                            <Link
+                              to={`/admin/productImage/${category_id}/${row.id}`}
+                            >
                               <Button>
                                 <FontAwesomeIcon icon={faEdit} />
                               </Button>
@@ -546,9 +579,17 @@ const AdminProducts = () => {
                         var value = String(row[column.id]);
 
                         return column.id === "description" ? (
-                            <TableCell key={column.id} align={column.align} style={{textOverflow:"ellipsis", overflow:"hidden", minWidth:"40rem"}}>
-                              {value}
-                            </TableCell>
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{
+                              textOverflow: "ellipsis",
+                              overflow: "hidden",
+                              minWidth: "40rem",
+                            }}
+                          >
+                            {value}
+                          </TableCell>
                         ) : (
                           <TableCell key={column.id} align={column.align}>
                             {value}
