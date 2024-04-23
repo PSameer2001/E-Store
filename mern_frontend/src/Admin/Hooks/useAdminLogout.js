@@ -6,7 +6,7 @@ const useAdminLogOut = () => {
 
   const logout = async () => {
     try {
-      const res = await axios.post(`/adminlogout`);
+      const res = await axios.post(`/api/adminlogout`);
       if (res.data.message === "logout") {
         dispatch({ type: "adminlogout" });
         localStorage.removeItem("authAdmin");

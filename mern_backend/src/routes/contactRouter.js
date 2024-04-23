@@ -5,12 +5,12 @@ const { verifyToken } = require('../middlewares/authMiddleware');
 const contactRouter = Router();
 
 // Post method
-contactRouter.post("/createTicket",verifyToken, contact.addTicket);
-contactRouter.post("/updateTicketStatus",verifyToken, contact.updateTicketStatus);
+contactRouter.post("/api/createTicket",verifyToken, contact.addTicket);
+contactRouter.post("/api/updateTicketStatus",verifyToken, contact.updateTicketStatus);
 
 // get method
-contactRouter.get("/getactiveTicketData",verifyToken, contact.getactiveTicketData);
-contactRouter.get("/getuserTicketData",verifyToken, contact.getuserTicketData);
-contactRouter.get("/getallTicketData", contact.getallTicketData);
+contactRouter.get("/api/getactiveTicketData",verifyToken, contact.getactiveTicketData);
+contactRouter.get("/api/getuserTicketData",verifyToken, contact.getuserTicketData);
+contactRouter.get("/api/getallTicketData", contact.getallTicketData);
 
 module.exports = contactRouter;

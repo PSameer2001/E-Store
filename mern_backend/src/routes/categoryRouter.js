@@ -6,13 +6,13 @@ const { storeImage } = require('../components/imageStorage');
 const categoryRouter = Router();
 // storeImage('category').single('imageUrl')
 // Post method
-categoryRouter.post("/addCategory",verifyAdminToken, category.addCategory);
-categoryRouter.post("/editCategory",verifyAdminToken, category.editCategory);
-categoryRouter.post("/deleteCategory", verifyAdminToken, category.deleteCategory);
+categoryRouter.post("/api/addCategory",verifyAdminToken, category.addCategory);
+categoryRouter.post("/api/editCategory",verifyAdminToken, category.editCategory);
+categoryRouter.post("/api/deleteCategory", verifyAdminToken, category.deleteCategory);
 
 
 // get method
-categoryRouter.get("/getallCategoryData", category.getallCategoryData);
+categoryRouter.get("/api/getallCategoryData", category.getallCategoryData);
 
 
 module.exports = categoryRouter;

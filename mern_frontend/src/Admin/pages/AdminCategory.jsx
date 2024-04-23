@@ -89,7 +89,7 @@ const AdminCategory = () => {
       uploadBytes(imageRef, imageUrl).then((snapshot) => {
         getDownloadURL(snapshot.ref).then(async (url) => {
           const res = await axios.post(
-            `/addCategory`,
+            `/api/addCategory`,
             {
               name: name,
               imageUrl: url,
@@ -113,7 +113,7 @@ const AdminCategory = () => {
   const handledeleteCategory = async (id) => {
     try {
       const res = await axios.post(
-        `/deleteCategory`,
+        `/api/deleteCategory`,
         { id }
       );
 
@@ -131,7 +131,7 @@ const AdminCategory = () => {
 
   const getallCategoryData = async () => {
     const res = await axios.get(
-      `/getallCategoryData`
+      `/api/getallCategoryData`
     );
     const data = res.data;
     setRows(data);
@@ -176,7 +176,7 @@ const AdminCategory = () => {
         uploadBytes(imageRef, editimageUrl).then((snapshot) => {
           getDownloadURL(snapshot.ref).then(async (url) => {
             const res = await axios.post(
-              `/editCategory`,
+              `/api/editCategory`,
               {
                 imageUrl: url,
                 name: name,
@@ -199,7 +199,7 @@ const AdminCategory = () => {
         });
       } else {
         const res = await axios.post(
-          `/editCategory`,
+          `/api/editCategory`,
           {
             name: name,
             editId: editId,

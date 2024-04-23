@@ -3,7 +3,7 @@ import axios from "axios";
 export const useForgotPassword = () => {
   const forgetPassword = async (email, password, otp) => {
     try {
-      const res = await axios.post(`/forgetPassword`, {
+      const res = await axios.post(`/api/forgetPassword`, {
         email,
         password,
         otp,

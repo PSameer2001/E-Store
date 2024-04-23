@@ -6,7 +6,7 @@ const useLogOut = () => {
 
   const logout = async () => {
     try {
-      const res = await axios.post(`/logout`);
+      const res = await axios.post(`/api/logout`);
       if (res.data.message === "logout") {
         dispatch({ type: "logout" });
         localStorage.removeItem("authUser");

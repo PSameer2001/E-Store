@@ -5,13 +5,13 @@ const { verifyToken } = require('../middlewares/authMiddleware');
 const cartRouter = Router();
 
 // Post method
-cartRouter.post("/addtoCart",verifyToken, cart.addtoCart);
-cartRouter.post("/getCartData", cart.getCartData);
-cartRouter.post("/removeFromCart",verifyToken, cart.removeFromCart);
-cartRouter.post("/updateQuantityofProduct",verifyToken, cart.updateQuantityofProduct);
-cartRouter.post("/getUserCouponData", cart.getUserCouponData);
-cartRouter.post("/applyCoupon", cart.applyCoupon);
-cartRouter.post("/removeCoupon", cart.removeCoupon);
+cartRouter.post("/api/addtoCart",verifyToken, cart.addtoCart);
+cartRouter.post("/api/getCartData", cart.getCartData);
+cartRouter.post("/api/removeFromCart",verifyToken, cart.removeFromCart);
+cartRouter.post("/api/updateQuantityofProduct",verifyToken, cart.updateQuantityofProduct);
+cartRouter.post("/api/getUserCouponData", cart.getUserCouponData);
+cartRouter.post("/api/applyCoupon", cart.applyCoupon);
+cartRouter.post("/api/removeCoupon", cart.removeCoupon);
 
 
 module.exports = cartRouter;

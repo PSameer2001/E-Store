@@ -5,17 +5,17 @@ const { verifyAdminToken } = require("../middlewares/adminAuthMiddleware");
 const adminRouter = Router();
 
 // Post Method
-adminRouter.post("/adminlogin", admin.loginAdmin);
-adminRouter.post("/adminlogout", admin.logOutAdmin);
-adminRouter.post("/addAdmin", verifyAdminToken, admin.addAdmin);
-adminRouter.post("/deleteAdmin", verifyAdminToken, admin.deleteAdmin);
-adminRouter.post("/editAdmin", verifyAdminToken, admin.editAdmin);
-adminRouter.post("/deleteUser", verifyAdminToken, admin.deleteUser);
+adminRouter.post("/api/adminlogin", admin.loginAdmin);
+adminRouter.post("/api/adminlogout", admin.logOutAdmin);
+adminRouter.post("/api/addAdmin", verifyAdminToken, admin.addAdmin);
+adminRouter.post("/api/deleteAdmin", verifyAdminToken, admin.deleteAdmin);
+adminRouter.post("/api/editAdmin", verifyAdminToken, admin.editAdmin);
+adminRouter.post("/api/deleteUser", verifyAdminToken, admin.deleteUser);
 
 // Get Method
-adminRouter.get("/getAdminData", verifyAdminToken, admin.getAdminData);
-adminRouter.get("/getallUserData", verifyAdminToken, admin.getallUserData);
-adminRouter.get("/getallAdminData", verifyAdminToken, admin.getallAdminData);
-adminRouter.get("/getdashBoardData", verifyAdminToken, admin.getdashBoardData);
+adminRouter.get("/api/getAdminData", verifyAdminToken, admin.getAdminData);
+adminRouter.get("/api/getallUserData", verifyAdminToken, admin.getallUserData);
+adminRouter.get("/api/getallAdminData", verifyAdminToken, admin.getallAdminData);
+adminRouter.get("/api/getdashBoardData", verifyAdminToken, admin.getdashBoardData);
 
 module.exports = adminRouter;

@@ -5,11 +5,11 @@ const { verifyAdminToken } = require('../middlewares/adminAuthMiddleware');
 const sectionRouter = Router();
 
 // Post method
-sectionRouter.post("/addSection", verifyAdminToken, section.addSection);
-sectionRouter.post("/deleteSection", verifyAdminToken, section.deleteSection);
-sectionRouter.post("/editSection", verifyAdminToken, section.editSection);
+sectionRouter.post("/api/addSection", verifyAdminToken, section.addSection);
+sectionRouter.post("/api/deleteSection", verifyAdminToken, section.deleteSection);
+sectionRouter.post("/api/editSection", verifyAdminToken, section.editSection);
 
 // get method
-sectionRouter.get("/getallSectionData", section.getallSectionData);
+sectionRouter.get("/api/getallSectionData", section.getallSectionData);
 
 module.exports = sectionRouter;

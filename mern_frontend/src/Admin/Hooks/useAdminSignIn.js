@@ -6,7 +6,7 @@ export const useAdminSignIn = () => {
 
   const signin = async (email, password) => {
     try {
-      const res = await axios.post(`/adminlogin`, {
+      const res = await axios.post(`/api/adminlogin`, {
         email,
         password,
       });

@@ -81,7 +81,7 @@ const Profile = (props) => {
       let formObject = Object.fromEntries(formData.entries());
       // console.log(formObject);
 
-      const res = await axios.post(`/updateUser`, formObject);
+      const res = await axios.post(`/api/updateUser`, formObject);
       let message = res.data.message;
 
       if (message === "success") {
@@ -122,7 +122,7 @@ const Profile = (props) => {
       }
 
       setIsPasswordLoading(true);
-      const res = await axios.post(`/updatePassword`, {
+      const res = await axios.post(`/api/updatePassword`, {
         email,
         currentPassword,
         newPassword,
@@ -164,7 +164,7 @@ const Profile = (props) => {
       const imageRef = ref(imageDB, `/profile/${file.name}`);
       uploadBytes(imageRef, file).then((snapshot) => {
         getDownloadURL(snapshot.ref).then(async (url) => {
-          const res = await axios.post(`/updateProfilePhoto`, {
+          const res = await axios.post(`/api/updateProfilePhoto`, {
             email : currentUser.email,
             imageUrl: url
           });

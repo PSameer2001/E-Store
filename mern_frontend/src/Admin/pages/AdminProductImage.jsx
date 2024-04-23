@@ -45,7 +45,7 @@ const AdminProductImage = () => {
 
   const getallProductImageData = async (product_id) => {
     const res = await axios.get(
-      `/getallImageProductData/${product_id}`
+      `/api/getallImageProductData/${product_id}`
     );
     const data = res.data;
     setRows(data);
@@ -110,7 +110,7 @@ const AdminProductImage = () => {
 
       setIsLoading(true);
       const res = await axios.post(
-        `/addProductImage`,
+        `/api/addProductImage`,
         {
           Id: product_id,
           imageUrl: imageUrl
@@ -134,7 +134,7 @@ const AdminProductImage = () => {
   const handledeleteProductImage = async (id) => {
     try {
       const res = await axios.post(
-        `/deleteImageProduct`,
+        `/api/deleteImageProduct`,
         { id }
       );
 
@@ -160,7 +160,7 @@ const AdminProductImage = () => {
       }
 
       const res = await axios.post(
-        `/makeDefaultImageProduct/${selectedValue}/${product_id}`
+        `/api/makeDefaultImageProduct/${selectedValue}/${product_id}`
       );
 
       const data = await res.data.message;

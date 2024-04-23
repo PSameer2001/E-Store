@@ -43,7 +43,7 @@ export default function AdminUsers() {
   };
 
   const getallUserData = async () => {
-    const res = await axios.get(`/getallUserData`);
+    const res = await axios.get(`/api/getallUserData`);
     const data = res.data;
     setRows(data);
   };
@@ -52,7 +52,7 @@ export default function AdminUsers() {
 
   const handledeleteuser = async (id) => {
     try {
-      const res = await axios.post(`/deleteUser`, { id });
+      const res = await axios.post(`/api/deleteUser`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
