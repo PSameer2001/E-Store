@@ -10,7 +10,7 @@ const TicketPage = (props) => {
   const [allticket, setAllTicket] = useState([]);
 
   const getuserTicketData = async (email) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getuserTicketData`, {
+    const res = await axios.get(`/getuserTicketData`, {
       params: {
         email: email,
       },

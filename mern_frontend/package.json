@@ -2,7 +2,7 @@
   "name": "mern-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080/",
+  "proxy": "https://e-store-cvz4.onrender.com/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",

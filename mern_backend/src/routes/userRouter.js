@@ -17,7 +17,7 @@ userRouter.post('/updateProfilePhoto', user.updateProfilePhoto);
 userRouter.post('/updatePassword', user.updatePassword);
 
 // Get method
-userRouter.get('/getUserData',verifyToken, user.getUserData);
+userRouter.get('/getUserData', user.getUserData);
 userRouter.get('/verify/:email/:Id', user.verifyEmail);
 
 module.exports = userRouter;

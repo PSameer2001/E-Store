@@ -143,6 +143,7 @@ const loginUser = async (req, res) => {
             address: findUser.address,
             isAdmin: findUser.isAdmin,
             isSuperAdmin: findUser.isSuperAdmin,
+            token: token
           },
           message: "success",
         });

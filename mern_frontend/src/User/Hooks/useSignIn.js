@@ -6,7 +6,7 @@ export const useSignIn = () => {
 
   const signin = async (email, password) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/signin`, {
+      const res = await axios.post(`/signin`, {
         email,
         password,
       });
