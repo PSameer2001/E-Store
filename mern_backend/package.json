@@ -34,5 +34,8 @@
     "razorpay": "^2.9.2",
     "uuid": "^9.0.1",
     "validator": "^13.11.0"
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^3.0.0"
   }
 }

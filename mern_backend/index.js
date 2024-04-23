@@ -1,11 +1,12 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const db = require("./src/config/conn");
-const ejs = require('ejs');
+const ejs = require("ejs");
 const path = require("path");
 const userRouter = require("./src/routes/userRouter");
 const adminRouter = require("./src/routes/adminRouter");
@@ -21,8 +22,16 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+app.use(
+  "/api",
+  createProxyMiddleware({
+    target: "https://e-store-cvz4.onrender.com",
+    changeOrigin: true,
+  })
+);
+
 app.use(cors());
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs");
 app.use(cookieParser());
 app.use(express.json());
 
