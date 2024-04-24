@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/api"
+  to = "https://e-store-cvz4.onrender.com"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
