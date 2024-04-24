@@ -30,6 +30,16 @@ app.use(express.json());
 
 app.use(passport.initialize());
 
+app.get('/setcookie', (req, res) => {
+    res.cookie('myCookie', 'value', {
+      httpOnly: true, // Prevent client-side JavaScript access
+      secure: process.env.NODE_ENV === 'production', // Set secure only in production
+      maxAge: 1000 * 60 * 60, // Expires in 1 hour
+      sameSite: 'none' // Required for cross-site requests in some browsers
+    });
+    res.send('Cookie set successfully!');
+  });
+
 // Routes
 app.use(userRouter);
 app.use(adminRouter);
