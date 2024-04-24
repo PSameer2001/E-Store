@@ -132,6 +132,7 @@ const loginUser = async (req, res) => {
         res.cookie("jwtToken", token, {
           httpOnly: true,
           maxAge: 24 * 60 * 60 * 1000,
+          sameSite: "none",
         });
 
         return res.json({
@@ -143,7 +144,7 @@ const loginUser = async (req, res) => {
             address: findUser.address,
             isAdmin: findUser.isAdmin,
             isSuperAdmin: findUser.isSuperAdmin,
-            token: token
+            token: token,
           },
           message: "success",
         });
@@ -174,7 +175,7 @@ const getUserData = async (req, res) => {
         address: user.address,
         isAdmin: user.isAdmin,
         isSuperAdmin: user.isSuperAdmin,
-        imageUrl: user.imageUrl
+        imageUrl: user.imageUrl,
       };
       return res.json({ userData });
     } else {
@@ -287,7 +288,7 @@ const updateUser = async (req, res) => {
   try {
     const { name, email, phone, address } = req.body;
     const findUser = await User.findOne({ email });
-   
+
     const update = await User.findOneAndUpdate(
       { _id: findUser.id },
       { $set: { name: name, phone: phone, address: address } }
@@ -303,16 +304,16 @@ const updateUser = async (req, res) => {
 
 // Update User
 const updateProfilePhoto = async (req, res) => {
-    const { email, imageUrl } = req.body;
-    const findUser = await User.findOne({ email });
-    const update = await User.findOneAndUpdate(
-      { _id: findUser.id },
-      { $set: { imageUrl: imageUrl } }
-    );
+  const { email, imageUrl } = req.body;
+  const findUser = await User.findOne({ email });
+  const update = await User.findOneAndUpdate(
+    { _id: findUser.id },
+    { $set: { imageUrl: imageUrl } }
+  );
 
-    if (update) {
-      return res.json({ message: "success", file:imageUrl });
-    }
+  if (update) {
+    return res.json({ message: "success", file: imageUrl });
+  }
 };
 
 // Email Verification
@@ -360,5 +361,5 @@ module.exports = {
   SendEmailVerification,
   updateUser,
   updatePassword,
-  updateProfilePhoto
+  updateProfilePhoto,
 };
