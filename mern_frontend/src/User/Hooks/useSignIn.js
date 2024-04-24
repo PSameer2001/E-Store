@@ -6,15 +6,18 @@ export const useSignIn = () => {
 
   const signin = async (email, password) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/signin`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/signin`,
+        {
+          email,
+          password,
+        }
+      );
 
       if (res.data.message === "success") {
         const data = {
           name: res.data.authUser.name,
-          email: res.data.authUser.email
+          email: res.data.authUser.email,
         };
 
         localStorage.setItem("authUser", JSON.stringify(data));
@@ -26,8 +29,19 @@ export const useSignIn = () => {
           payload4: res.data.authUser.address,
           payload5: res.data.authUser.isAdmin,
           payload6: res.data.authUser.isSuperAdmin,
-          payload7: res.data.authUser.imageUrl
+          payload7: res.data.authUser.imageUrl,
         });
+
+        if (res.data.authUser.token) {
+          await axios.get(
+            `${process.env.REACT_APP_SERVER_URL}/api/signin_setcookie`,
+            {
+              params: {
+                token: res.data.authUser.token,
+              },
+            }
+          );
+        }
       }
 
       return res.data.message;

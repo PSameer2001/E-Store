@@ -17,5 +17,6 @@ adminRouter.get("/api/getAdminData", verifyAdminToken, admin.getAdminData);
 adminRouter.get("/api/getallUserData", verifyAdminToken, admin.getallUserData);
 adminRouter.get("/api/getallAdminData", verifyAdminToken, admin.getallAdminData);
 adminRouter.get("/api/getdashBoardData", verifyAdminToken, admin.getdashBoardData);
+adminRouter.get('/api/signinadmin_setcookie', admin.signInAdminsetcookie);
 
 module.exports = adminRouter;

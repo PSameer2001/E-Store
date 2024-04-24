@@ -131,7 +131,7 @@ const loginUser = async (req, res) => {
         const token = generateToken(findUser?._id);
         res.cookie("jwtToken", token, {
           httpOnly: true,
-          maxAge: 24 * 60 * 60 * 1000
+          maxAge: 24 * 60 * 60 * 1000,
         });
 
         return res.json({
@@ -158,6 +158,15 @@ const loginUser = async (req, res) => {
   } catch (error) {
     return res.json({ message: error });
   }
+};
+
+// Setcookie
+const signInsetcookie = async (req, res) => {
+  const { token } = req.query.params;
+  res.cookie("jwtToken", token, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 };
 
 // GetUser
@@ -361,4 +370,5 @@ module.exports = {
   updateUser,
   updatePassword,
   updateProfilePhoto,
+  signInsetcookie,
 };

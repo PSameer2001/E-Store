@@ -27,6 +27,17 @@ export const useAdminSignIn = () => {
           payload5: res.data.authAdmin.isAdmin,
           payload6: res.data.authAdmin.isSuperAdmin
         });
+
+        if (res.data.authAdmin.token) {
+          await axios.get(
+            `${process.env.REACT_APP_SERVER_URL}/api/signinadmin_setcookie`,
+            {
+              params: {
+                token: res.data.authUser.token,
+              },
+            }
+          );
+        }
       }
 
       return res.data.message;

@@ -88,6 +88,7 @@ const loginAdmin = async (req, res) => {
             address: findUser.address,
             isAdmin: findUser.isAdmin,
             isSuperAdmin: findUser.isSuperAdmin,
+            token: token
           },
           message: "success",
         });
@@ -102,6 +103,15 @@ const loginAdmin = async (req, res) => {
   } catch (error) {
     return res.json({ message: error });
   }
+};
+
+// Setcookie
+const signInAdminsetcookie = async (req, res) => {
+  const { token } = req.query.params;
+  res.cookie("jwtAdminToken", token, {
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 };
 
 // Get Admin data
@@ -335,4 +345,5 @@ module.exports = {
   deleteUser,
   editAdmin,
   getdashBoardData,
+  signInAdminsetcookie
 };
