@@ -76,6 +76,7 @@ const loginAdmin = async (req, res) => {
           res.cookie("jwtAdminToken", token, {
             httpOnly: true,
             maxAge: 24 * 60 * 60 * 1000,
+            secure: process.env.NODE_ENV === 'production',
             sameSite: 'none'
           });
        
