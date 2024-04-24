@@ -92,7 +92,7 @@ const AdminProducts = () => {
 
   const getallProductData = async (category_id) => {
     const res = await axios.get(
-      `/api/getallProductData/${category_id}`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`
     );
     const data = res.data;
     setRows(data);
@@ -100,7 +100,7 @@ const AdminProducts = () => {
 
   const getallCategoryData = async () => {
     const res = await axios.get(
-      `/api/getallCategoryData`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`
     );
     const data = res.data;
     setCategory(data);
@@ -134,7 +134,7 @@ const AdminProducts = () => {
 
       setIsLoading(true);
       const res = await axios.post(
-        `/api/addProduct`,
+        `${process.env.REACT_APP_SERVER_URL}/api/addProduct`,
         {
           name: product.name,
           brand: product.brand,
@@ -170,7 +170,7 @@ const AdminProducts = () => {
   const handledeleteProduct = async (id) => {
     try {
       const res = await axios.post(
-        `/api/deleteProduct`,
+        `${process.env.REACT_APP_SERVER_URL}/api/deleteProduct`,
         { id }
       );
 
@@ -209,7 +209,7 @@ const AdminProducts = () => {
     try {
       setIsLoading(true);
       const res = await axios.post(
-        `/api/editProduct`,
+        `${process.env.REACT_APP_SERVER_URL}/api/editProduct`,
         editproduct
       );
       let message = res.data.message;

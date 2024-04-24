@@ -14,7 +14,7 @@ export default function Orders() {
   const [rows, setRows] = useState([]);
 
   const getRecentOrders = async () => {
-    const res = await axios.get(`/api/getRecentOrders`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getRecentOrders`);
     const data = res.data;
     setRows(data);
   };

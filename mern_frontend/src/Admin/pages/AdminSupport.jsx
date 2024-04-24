@@ -67,7 +67,7 @@ const AdminSupport = () => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const res = await axios.post(`/api/updateTicketStatus`, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateTicketStatus`, {
         editId: status.editId,
         editStatus: status.editStatus
       });
@@ -85,7 +85,7 @@ const AdminSupport = () => {
   };
 
   const getallTicketData = async () => {
-    const res = await axios.get(`/api/getallTicketData`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallTicketData`);
     const data = res.data;
     setRows(data);
   };

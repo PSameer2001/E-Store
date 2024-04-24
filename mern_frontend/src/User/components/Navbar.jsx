@@ -66,7 +66,7 @@ const Navbar = (props) => {
   };
 
   const getEveryProduct = async () => {
-    const res = await axios.get(`/api/getEveryProduct`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getEveryProduct`);
     const data = res.data;
     setallProduct(data);
   };

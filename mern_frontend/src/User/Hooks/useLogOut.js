@@ -6,7 +6,7 @@ const useLogOut = () => {
 
   const logout = async () => {
     try {
-      const res = await axios.post(`/api/logout`);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/logout`);
       if (res.data.message === "logout") {
         dispatch({ type: "logout" });
         localStorage.removeItem("authUser");

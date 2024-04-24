@@ -11,7 +11,7 @@ const MyOrder = (props) => {
   const [allorders, setAllOrders] = useState([]);
 
   const getAllUserOrders = async (email) => {
-    const res = await axios.post(`/api/getAllUserOrders`, { email });
+    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getAllUserOrders`, { email });
     const data = res.data;
     setAllOrders(data);
   };

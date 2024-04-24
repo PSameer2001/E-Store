@@ -23,7 +23,7 @@ const CategoryProduct = () => {
   const { category_id } = useParams();
 
   const getallProductData = async (category_id) => {
-    const res = await axios.get(`/api/getallProductData/${category_id}`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`);
     const data = res.data;
     setAllProducts(data);
     setProducts(data);

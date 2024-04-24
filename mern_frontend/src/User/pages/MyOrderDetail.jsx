@@ -19,7 +19,7 @@ const MyOrderDetail = (props) => {
   const [productAmount, setproductAmount] = useState(0);
 
   const getOrders = async (orderid) => {
-    const res = await axios.get(`/api/getOrders/${orderid}`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`);
     const orderdata = res.data;
     setOrders(orderdata);
 
@@ -35,7 +35,7 @@ const MyOrderDetail = (props) => {
   };
 
   const getOrderProducts = async (orderid) => {
-    const res = await axios.get(`/api/getOrderProducts/${orderid}`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`);
     const productdata = res.data;
     setProductData(productdata);
 
@@ -47,7 +47,7 @@ const MyOrderDetail = (props) => {
   };
 
   const handleSubmitReview = async (id) => {
-    const res = await axios.post(`/api/addReview`, {
+    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addReview`, {
       id,
       productReview,
       email: user.email,

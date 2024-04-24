@@ -90,7 +90,7 @@ export default function AdminList() {
     const { name, email, password } = user;
     try {
       setIsLoading(true);
-      const res = await axios.post(`/api/addAdmin`, {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addAdmin`, {
         name,
         email,
         password,
@@ -119,7 +119,7 @@ export default function AdminList() {
 
   const handledeleteAdmin = async (id) => {
     try {
-      const res = await axios.post(`/api/deleteAdmin`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteAdmin`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -139,7 +139,7 @@ export default function AdminList() {
   };
 
   const getallAdminData = async () => {
-    const res = await axios.get(`/api/getallAdminData`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallAdminData`);
     const data = res.data;
     setRows(data);
   };
@@ -164,7 +164,7 @@ export default function AdminList() {
       
       try {
         setIsLoading(true);
-        const res = await axios.post(`/api/editAdmin`, {
+        const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editAdmin`, {
           name,
           email,
           password,

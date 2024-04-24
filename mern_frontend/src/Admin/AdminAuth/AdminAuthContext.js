@@ -28,7 +28,7 @@ const AdminAuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getAdminData = async () => {
-      const res = await axios.get(`/api/getAdminData`);
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAdminData`);
       return res.data.adminData;
     };
     getAdminData()

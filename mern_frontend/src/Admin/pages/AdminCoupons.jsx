@@ -76,7 +76,7 @@ const AdminCoupons = () => {
   };
 
   const getallCouponData = async () => {
-    const res = await axios.get(`/api/getallCouponData`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCouponData`);
     const data = res.data;
     setRows(data);
   };
@@ -85,7 +85,7 @@ const AdminCoupons = () => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      const res = await axios.post(`/api/addCoupon`, coupondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addCoupon`, coupondata);
       let message = res.data.message;
 
       if (message === "success") {
@@ -109,7 +109,7 @@ const AdminCoupons = () => {
 
   const handledeleteCoupon = async (id) => {
     try {
-      const res = await axios.post(`/api/deleteCoupon`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteCoupon`, { id });
 
       const data = await res.data.message;
       if (data === "success") {
@@ -141,7 +141,7 @@ const AdminCoupons = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`/api/editCoupon`, editcoupondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editCoupon`, editcoupondata);
       let message = res.data.message;
 
       if (message === "success") {

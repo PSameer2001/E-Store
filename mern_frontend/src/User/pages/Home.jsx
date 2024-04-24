@@ -21,7 +21,7 @@ const Home = (props) => {
   const [sectiondata, setSectionData] = useState([]);
 
   const getallSectionData = async () => {
-    const res = await axios.get(`/api/getallSectionData`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallSectionData`);
     const data = res.data;
     setSectionData(data);
   };

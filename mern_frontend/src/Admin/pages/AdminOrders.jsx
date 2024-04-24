@@ -54,7 +54,7 @@ const AdminOrders = () => {
   };
 
   const getAllOrders = async () => {
-    const res = await axios.get(`/api/getAllOrders`);
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAllOrders`);
     const data = res.data;
     setRows(data);
   };
@@ -106,7 +106,7 @@ const AdminOrders = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`/api/editOrder`, editdata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editOrder`, editdata);
       let message = res.data.message;
 
       if (message === "success") {
