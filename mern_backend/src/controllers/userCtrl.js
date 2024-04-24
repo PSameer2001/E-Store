@@ -162,7 +162,7 @@ const loginUser = async (req, res) => {
 
 // Setcookie
 const signInsetcookie = async (req, res) => {
-  const { token } = req.query.params;
+  const { token } = req.params;
   res.cookie("jwtToken", token, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,

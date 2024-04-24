@@ -107,7 +107,7 @@ const loginAdmin = async (req, res) => {
 
 // Setcookie
 const signInAdminsetcookie = async (req, res) => {
-  const { token } = req.query.params;
+  const { token } = req.params;
 
   try {
   res.cookie("jwtAdminToken", token, {
