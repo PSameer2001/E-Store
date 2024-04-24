@@ -108,10 +108,16 @@ const loginAdmin = async (req, res) => {
 // Setcookie
 const signInAdminsetcookie = async (req, res) => {
   const { token } = req.query.params;
+
+  try {
   res.cookie("jwtAdminToken", token, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
   });
+  return res.json({message: 'Cookie set successfully!'});
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Get Admin data
