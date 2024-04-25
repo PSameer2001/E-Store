@@ -10,7 +10,7 @@ const TicketPage = (props) => {
   const userHeaders = getUserCookie();
   const [allticket, setAllTicket] = useState([]);
 
-  const getuserTicketData = async (email, userHeaders) => {
+  const getuserTicketData = async (email) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getuserTicketData`,
       {
@@ -25,8 +25,8 @@ const TicketPage = (props) => {
   };
 
   useEffect(() => {
-    getuserTicketData(user.email, userHeaders);
-  }, [user, userHeaders]);
+    getuserTicketData(user.email);
+  }, [user]);
   return (
     <>
       <div className="myticket">

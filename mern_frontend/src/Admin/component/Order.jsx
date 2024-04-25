@@ -15,15 +15,15 @@ export default function Orders() {
   const [rows, setRows] = useState([]);
   const adminHeaders = getAdminCookie();
 
-  const getRecentOrders = async (adminHeaders) => {
+  const getRecentOrders = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getRecentOrders`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   useEffect(() => {
-    getRecentOrders(adminHeaders);
-  }, [adminHeaders]);
+    getRecentOrders();
+  }, []);
 
   return (
     <React.Fragment>

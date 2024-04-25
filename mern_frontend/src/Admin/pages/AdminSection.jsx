@@ -77,14 +77,14 @@ const AdminSection = () => {
     setEditSectiondata({ ...editsectiondata, [name]: value });
   };
 
-  const getallSectionData = async (adminHeaders) => {
+  const getallSectionData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallSectionData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   const [category, setCategory] = useState([]);
-  const getallCategoryData = async (adminHeaders) => {
+  const getallCategoryData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders);
     const data = res.data;
     setCategory(data);
@@ -165,9 +165,9 @@ const AdminSection = () => {
   };
 
   useEffect(() => {
-    getallCategoryData(adminHeaders);
-    getallSectionData(adminHeaders);
-  }, [adminHeaders]);
+    getallCategoryData();
+    getallSectionData();
+  }, []);
 
   const style = {
     position: "absolute",

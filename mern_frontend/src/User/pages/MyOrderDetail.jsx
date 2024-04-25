@@ -19,7 +19,7 @@ const userHeaders = getUserCookie();
   const [progressdata, setProgressData] = useState(0);
   const [productAmount, setproductAmount] = useState(0);
 
-  const getOrders = async (orderid,userHeaders) => {
+  const getOrders = async (orderid) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`,userHeaders);
     const orderdata = res.data;
     setOrders(orderdata);
@@ -35,7 +35,7 @@ const userHeaders = getUserCookie();
     }
   };
 
-  const getOrderProducts = async (orderid,userHeaders) => {
+  const getOrderProducts = async (orderid) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`,userHeaders);
     const productdata = res.data;
     setProductData(productdata);
@@ -58,15 +58,15 @@ const userHeaders = getUserCookie();
     if (message === "success") {
       toast.success("Review Added Successfully", { duration: 1000 });
       setProductReview("");
-      getOrders(orderid,userHeaders);
-      getOrderProducts(orderid,userHeaders);
+      getOrders(orderid);
+      getOrderProducts(orderid);
     }
   };
 
   useEffect(() => {
-    getOrders(orderid,userHeaders);
-    getOrderProducts(orderid,userHeaders);
-  }, [orderid,userHeaders]);
+    getOrders(orderid);
+    getOrderProducts(orderid);
+  }, [orderid]);
 
   return (
     <>

@@ -67,7 +67,7 @@ const Navbar = (props) => {
     }
   };
 
-  const getEveryProduct = async (userHeaders) => {
+  const getEveryProduct = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getEveryProduct`,userHeaders);
     const data = res.data;
     setallProduct(data);
@@ -94,10 +94,10 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    getEveryProduct(userHeaders);
+    getEveryProduct();
     window.addEventListener("scroll", handleOnScroll);
     return () => window.removeEventListener("scroll", handleOnScroll);
-  }, [userHeaders]);
+  }, []);
 
   return (
     <>

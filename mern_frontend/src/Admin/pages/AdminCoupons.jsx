@@ -77,7 +77,7 @@ const AdminCoupons = () => {
     setEditCoupondata({ ...editcoupondata, [name]: value });
   };
 
-  const getallCouponData = async (adminHeaders) => {
+  const getallCouponData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCouponData`,adminHeaders);
     const data = res.data;
     setRows(data);
@@ -161,8 +161,8 @@ const AdminCoupons = () => {
   };
 
   useEffect(() => {
-    getallCouponData(adminHeaders);
-  }, [adminHeaders]);
+    getallCouponData();
+  }, []);
 
   const style = {
     position: "absolute",

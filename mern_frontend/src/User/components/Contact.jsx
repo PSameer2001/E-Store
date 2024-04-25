@@ -13,7 +13,7 @@ const Contact = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [ticket, setIsTicket] = useState(false);
 
-  const getactiveTicketData = async (email,userHeaders) => {
+  const getactiveTicketData = async (email) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getactiveTicketData/` ,{
       params : {
         email: email
@@ -60,9 +60,8 @@ const Contact = (props) => {
   };
 
   useEffect(() => {
-    getactiveTicketData(user.email,
-      userHeaders);
-  }, [user,userHeaders])
+    getactiveTicketData(user.email);
+  }, [user])
   
 
   return (

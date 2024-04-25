@@ -92,7 +92,7 @@ const AdminProducts = () => {
 
   const [productImage, setProductImage] = useState();
 
-  const getallProductData = async (category_id,adminHeaders) => {
+  const getallProductData = async (category_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,adminHeaders
     );
@@ -100,7 +100,7 @@ const AdminProducts = () => {
     setRows(data);
   };
 
-  const getallCategoryData = async (adminHeaders) => {
+  const getallCategoryData = async () => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders
     );
@@ -237,9 +237,9 @@ const AdminProducts = () => {
   };
 
   useEffect(() => {
-    getallCategoryData(adminHeaders);
-    getallProductData(category_id,adminHeaders);
-  }, [category_id,adminHeaders]);
+    getallCategoryData();
+    getallProductData(category_id);
+  }, [category_id]);
 
   const style = {
     position: "absolute",

@@ -26,13 +26,13 @@ const ContentSwiper = (props) => {
   const [productdata, setProductData] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const getallProductData = async (category_id,userHeaders) => {
+  const getallProductData = async (category_id) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,userHeaders);
     const data = res.data;
     setProductData(data);
   };
 
-  const getallCategoryData = async (category_id,userHeaders) => {
+  const getallCategoryData = async (category_id) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,userHeaders);
     const data = res.data;
     const category = data.filter((data) => data.id === category_id)[0];
@@ -40,9 +40,9 @@ const ContentSwiper = (props) => {
   };
 
   useEffect(() => {
-    getallProductData(section.category_id,userHeaders);
-    getallCategoryData(section.category_id, userHeaders);
-  }, [section,userHeaders]);
+    getallProductData(section.category_id);
+    getallCategoryData(section.category_id);
+  }, [section]);
 
   const handleCart = async (productid) => {
     try {

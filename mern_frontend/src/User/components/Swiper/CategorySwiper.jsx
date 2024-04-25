@@ -16,7 +16,7 @@ const CategorySwiper = () => {
   const userHeaders  = getUserCookie();
   const [data, setData] = useState([]);
 
-  const getallCategoryData = async (userHeaders) => {
+  const getallCategoryData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`, userHeaders);
     const resdata = res.data;
     setData(resdata);
@@ -24,7 +24,7 @@ const CategorySwiper = () => {
 
   useEffect(() => {
     getallCategoryData();
-  }, [userHeaders]);
+  }, []);
 
   return (
     <>

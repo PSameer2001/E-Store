@@ -17,7 +17,7 @@ const AdminDashboard = () => {
   const [order, SetOrder] = useState([]);
   const adminHeaders = getAdminCookie();
 
-  const getdashBoardData = async (adminHeaders) => {
+  const getdashBoardData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getdashBoardData`,adminHeaders);
     SetDashboard(res.data.dashboard);
     SetContact(res.data.contactdata);
@@ -25,8 +25,8 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    getdashBoardData(adminHeaders);
-  }, [adminHeaders]);
+    getdashBoardData();
+  }, []);
 
   function Copyright(props) {
     return (

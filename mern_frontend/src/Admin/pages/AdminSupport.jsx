@@ -86,15 +86,15 @@ const AdminSupport = () => {
     }
   };
 
-  const getallTicketData = async (adminHeaders) => {
+  const getallTicketData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallTicketData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   useEffect(() => {
-    getallTicketData(adminHeaders);
-  }, [adminHeaders]);
+    getallTicketData();
+  }, []);
 
   const style = {
     position: "absolute",

@@ -45,7 +45,7 @@ const AdminProductImage = () => {
     setSelectedValue(value);
   };
 
-  const getallProductImageData = async (product_id,adminHeaders) => {
+  const getallProductImageData = async (product_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`,adminHeaders
     );
@@ -60,8 +60,8 @@ const AdminProductImage = () => {
   };
 
   useEffect(() => {
-    getallProductImageData(product_id,adminHeaders);
-  }, [product_id,adminHeaders]);
+    getallProductImageData(product_id);
+  }, [product_id]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);

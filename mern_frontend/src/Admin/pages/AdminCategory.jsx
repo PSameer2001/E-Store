@@ -131,7 +131,7 @@ const adminHeaders = getAdminCookie();
     }
   };
 
-  const getallCategoryData = async (adminHeaders) => {
+  const getallCategoryData = async () => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders
     );
@@ -226,8 +226,8 @@ const adminHeaders = getAdminCookie();
   };
 
   useEffect(() => {
-    getallCategoryData(adminHeaders);
-  }, [adminHeaders]);
+    getallCategoryData();
+  }, []);
 
   const style = {
     position: "absolute",

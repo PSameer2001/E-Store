@@ -39,23 +39,23 @@ const AdminOrderDetails = () => {
     setPage(0);
   };
 
-  const getOrderProducts = async (orderid,adminHeaders) => {
+  const getOrderProducts = async (orderid) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`,adminHeaders);
     const productdata = res.data;
     setRows(productdata);
   };
 
   const [orders, setOrders] = useState({});
-  const getOrders = async (orderid,adminHeaders) => {
+  const getOrders = async (orderid) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`,adminHeaders);
     const orderdata = res.data;
     setOrders(orderdata);
   };
 
   useEffect(() => {
-    getOrderProducts(order_id,adminHeaders);
-    getOrders(order_id,adminHeaders);
-  }, [order_id,adminHeaders]);
+    getOrderProducts(order_id);
+    getOrders(order_id);
+  }, [order_id]);
 
   return (
     <>

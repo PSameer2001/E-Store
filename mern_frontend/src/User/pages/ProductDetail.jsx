@@ -32,7 +32,7 @@ const ProductDetail = (props) => {
   const [productImageData, setProductImageData] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const getallProductImageData = async (product_id,userHeaders) => {
+  const getallProductImageData = async (product_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`,userHeaders
     );
@@ -42,7 +42,7 @@ const ProductDetail = (props) => {
     }
   };
 
-  const getProductData = async (product_id,userHeaders) => {
+  const getProductData = async (product_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getProductData/${product_id}`,userHeaders
     );
@@ -53,7 +53,7 @@ const ProductDetail = (props) => {
     }
   };
 
-  const getProductReviewData = async (product_id,userHeaders) => {
+  const getProductReviewData = async (product_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getProductReviewData/${product_id}`,userHeaders
     );
@@ -64,7 +64,7 @@ const ProductDetail = (props) => {
     }
   };
 
-  const getallCategoryData = async (category_id,userHeaders) => {
+  const getallCategoryData = async (category_id) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,userHeaders
     );
@@ -80,11 +80,11 @@ const ProductDetail = (props) => {
   };
 
   useEffect(() => {
-    getallProductImageData(product_id,userHeaders);
-    getProductData(product_id,userHeaders);
-    getallCategoryData(category_id,userHeaders);
-    getProductReviewData(product_id,userHeaders);
-  }, [product_id, category_id,userHeaders]);
+    getallProductImageData(product_id);
+    getProductData(product_id);
+    getallCategoryData(category_id);
+    getProductReviewData(product_id);
+  }, [product_id, category_id]);
 
   const [quantity, setquantity] = useState(1);
 

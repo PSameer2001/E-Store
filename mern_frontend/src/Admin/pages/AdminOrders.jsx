@@ -55,7 +55,7 @@ const AdminOrders = () => {
     setPage(0);
   };
 
-  const getAllOrders = async (adminHeaders) => {
+  const getAllOrders = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAllOrders`,adminHeaders);
     const data = res.data;
     setRows(data);
@@ -132,8 +132,8 @@ const AdminOrders = () => {
   };
 
   useEffect(() => {
-    getAllOrders(adminHeaders);
-  }, [adminHeaders]);
+    getAllOrders();
+  }, []);
 
   const style = {
     position: "absolute",

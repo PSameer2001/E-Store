@@ -23,7 +23,7 @@ const CategoryProduct = () => {
 const userHeaders = getUserCookie();
   const { category_id } = useParams();
 
-  const getallProductData = async (category_id,userHeaders) => {
+  const getallProductData = async (category_id) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,userHeaders);
     const data = res.data;
     setAllProducts(data);
@@ -52,8 +52,8 @@ const userHeaders = getUserCookie();
   };
 
   useEffect(() => {
-    getallProductData(category_id,userHeaders);
-  }, [category_id,userHeaders]);
+    getallProductData(category_id);
+  }, [category_id]);
 
   useEffect(() => {
     if (screenSize.width > 768) {

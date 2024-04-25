@@ -40,7 +40,7 @@ const AddToCart = (props) => {
   });
   const [couponAmount, setcouponAmount] = useState(0);
 
-  const getCartData = async (email, userHeaders) => {
+  const getCartData = async (email) => {
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getCartData`, {
       email: email,
     }, userHeaders);
@@ -72,7 +72,7 @@ const AddToCart = (props) => {
     setfinalAmount(finalAmount);
   };
 
-  const getUserCouponData = async (email,userHeaders) => {
+  const getUserCouponData = async (email) => {
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getUserCouponData`, {
       email: email,
     },userHeaders);
@@ -137,8 +137,8 @@ const AddToCart = (props) => {
 
         const data = await res.data.message;
         if (data === "success") {
-          getCartData(user.email,userHeaders);
-          getUserCouponData(user.email,userHeaders);
+          getCartData(user.email);
+          getUserCouponData(user.email);
           // getallCouponData();
         } else {
           toast.error(data, { duration: 1000 });
@@ -147,7 +147,7 @@ const AddToCart = (props) => {
 
       return () => clearTimeout(timer);
     }
-  }, [cartId, cartQuantity, user,userHeaders]);
+  }, [cartId, cartQuantity, user]);
 
   const selectCoupon = (coupon) => {
     setcouponSelect({

@@ -11,15 +11,15 @@ const MyOrder = (props) => {
 const userHeaders = getUserCookie();
   const [allorders, setAllOrders] = useState([]);
 
-  const getAllUserOrders = async (email,userHeaders) => {
+  const getAllUserOrders = async (email) => {
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getAllUserOrders`, { email },userHeaders);
     const data = res.data;
     setAllOrders(data);
   };
 
   useEffect(() => {
-    getAllUserOrders(user.email,userHeaders);
-  }, [user,userHeaders]);
+    getAllUserOrders(user.email);
+  }, [user]);
 
   return (
     <div className="myorder">

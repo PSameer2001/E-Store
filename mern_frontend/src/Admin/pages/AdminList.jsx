@@ -140,7 +140,7 @@ export default function AdminList() {
     }
   };
 
-  const getallAdminData = async (adminHeaders) => {
+  const getallAdminData = async () => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallAdminData`,adminHeaders);
     const data = res.data;
     setRows(data);
@@ -195,8 +195,8 @@ export default function AdminList() {
       }
   };
 
-  useEffect((adminHeaders) => {
-    getallAdminData(adminHeaders);
+  useEffect(() => {
+    getallAdminData();
   }, []);
 
   const style = {
