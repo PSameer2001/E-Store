@@ -162,7 +162,7 @@ const AdminProductImage = () => {
         return false;
       }
 
-      const res = await axios.post(
+      const res = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/api/makeDefaultImageProduct/${selectedValue}/${product_id}`,adminHeaders
       );
 
