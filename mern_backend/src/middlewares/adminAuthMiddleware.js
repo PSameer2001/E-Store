@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 
 const verifyAdminToken = async (req, res, next) => {
   try {
-    const accessToken = req.headers?.jwtAdminToken;
+    const accessToken = req.headers?.jwtadmintoken;
     if (accessToken) {
       const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
       if (verifieduser) {

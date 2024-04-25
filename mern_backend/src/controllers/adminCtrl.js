@@ -108,7 +108,7 @@ const loginAdmin = async (req, res) => {
 
 // Get Admin data
 const getAdminData = async (req, res) => {
-  const accessToken = req.headers?.jwtAdminToken;
+  const accessToken = req.headers?.jwtadmintoken;
   if (accessToken) {
     const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     if (verifieduser) {

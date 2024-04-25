@@ -163,7 +163,7 @@ const loginUser = async (req, res) => {
 
 // GetUser
 const getUserData = async (req, res) => {
-  const accessToken = req.headers?.jwtToken;
+  const accessToken = req.headers?.jwttoken;
   if (accessToken) {
     const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     if (verifieduser) {

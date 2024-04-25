@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -10,6 +11,7 @@ const TicketPage = (props) => {
   const userHeaders = getUserCookie();
   const [allticket, setAllTicket] = useState([]);
 
+
   const getuserTicketData = async (email) => {
     const res = await axios.get(
       `${process.env.REACT_APP_SERVER_URL}/api/getuserTicketData`,
@@ -17,15 +19,17 @@ const TicketPage = (props) => {
         params: {
           email: email,
         },
+        headers: userHeaders.headers
       },
-      userHeaders
     );
     const data = res.data;
     setAllTicket(data);
   };
 
+  
   useEffect(() => {
-    getuserTicketData(user.email);
+    
+    getuserTicketData(user.email);  // eslint-disable-next-line
   }, [user]);
   return (
     <>
