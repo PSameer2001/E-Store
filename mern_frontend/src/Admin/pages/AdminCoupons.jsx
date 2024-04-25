@@ -17,10 +17,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { ButtonGroup } from "@mui/material";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminCoupons = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "name", label: "Name" },
@@ -75,8 +77,8 @@ const AdminCoupons = () => {
     setEditCoupondata({ ...editcoupondata, [name]: value });
   };
 
-  const getallCouponData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCouponData`);
+  const getallCouponData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCouponData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
@@ -85,7 +87,7 @@ const AdminCoupons = () => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addCoupon`, coupondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addCoupon`, coupondata,adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -109,7 +111,7 @@ const AdminCoupons = () => {
 
   const handledeleteCoupon = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteCoupon`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteCoupon`, { id },adminHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -141,7 +143,7 @@ const AdminCoupons = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editCoupon`, editcoupondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editCoupon`, editcoupondata,adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -159,8 +161,8 @@ const AdminCoupons = () => {
   };
 
   useEffect(() => {
-    getallCouponData();
-  }, []);
+    getallCouponData(adminHeaders);
+  }, [adminHeaders]);
 
   const style = {
     position: "absolute",
