@@ -17,10 +17,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { ButtonGroup } from "@mui/material";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminSection = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "category_id", label: "Category" },
@@ -75,15 +77,15 @@ const AdminSection = () => {
     setEditSectiondata({ ...editsectiondata, [name]: value });
   };
 
-  const getallSectionData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallSectionData`);
+  const getallSectionData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallSectionData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   const [category, setCategory] = useState([]);
-  const getallCategoryData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`);
+  const getallCategoryData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders);
     const data = res.data;
     setCategory(data);
   };
@@ -92,7 +94,7 @@ const AdminSection = () => {
     try {
       e.preventDefault();
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addSection`, sectiondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addSection`, sectiondata,adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -114,7 +116,7 @@ const AdminSection = () => {
 
   const handledeleteSection = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteSection`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteSection`, { id },adminHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -147,7 +149,7 @@ const AdminSection = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editSection`, editsectiondata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editSection`, editsectiondata,adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -163,9 +165,9 @@ const AdminSection = () => {
   };
 
   useEffect(() => {
-    getallCategoryData();
-    getallSectionData();
-  }, []);
+    getallCategoryData(adminHeaders);
+    getallSectionData(adminHeaders);
+  }, [adminHeaders]);
 
   const style = {
     position: "absolute",

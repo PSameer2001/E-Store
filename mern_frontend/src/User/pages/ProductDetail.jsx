@@ -15,6 +15,7 @@ import axios from "axios";
 import Carousel from "react-bootstrap/Carousel";
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
+import getUserCookie from "../Auth/getUserCookie";
 
 const ProductDetail = (props) => {
   const authUser = props.authUser;
@@ -25,22 +26,26 @@ const ProductDetail = (props) => {
 
   const product_id = params.product_id;
   const category_id = params.category_id;
-
+  const userHeaders = getUserCookie();
   const [productDetail, setProductDetail] = useState([]);
   const [productReviewDetail, setProductReviewDetail] = useState([]);
   const [productImageData, setProductImageData] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const getallProductImageData = async (product_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`);
+  const getallProductImageData = async (product_id,userHeaders) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`,userHeaders
+    );
     const data = res.data;
     if (data) {
       setProductImageData(data);
     }
   };
 
-  const getProductData = async (product_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getProductData/${product_id}`);
+  const getProductData = async (product_id,userHeaders) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/getProductData/${product_id}`,userHeaders
+    );
     const data = res.data[0];
 
     if (data) {
@@ -48,8 +53,10 @@ const ProductDetail = (props) => {
     }
   };
 
-  const getProductReviewData = async (product_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getProductReviewData/${product_id}`);
+  const getProductReviewData = async (product_id,userHeaders) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/getProductReviewData/${product_id}`,userHeaders
+    );
     const data = res.data;
 
     if (data) {
@@ -57,8 +64,10 @@ const ProductDetail = (props) => {
     }
   };
 
-  const getallCategoryData = async (category_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`);
+  const getallCategoryData = async (category_id,userHeaders) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,userHeaders
+    );
     const data = res.data;
 
     if (data) {
@@ -71,11 +80,11 @@ const ProductDetail = (props) => {
   };
 
   useEffect(() => {
-    getallProductImageData(product_id);
-    getProductData(product_id);
-    getallCategoryData(category_id);
-    getProductReviewData(product_id);
-  }, [product_id, category_id]);
+    getallProductImageData(product_id,userHeaders);
+    getProductData(product_id,userHeaders);
+    getallCategoryData(category_id,userHeaders);
+    getProductReviewData(product_id,userHeaders);
+  }, [product_id, category_id,userHeaders]);
 
   const [quantity, setquantity] = useState(1);
 
@@ -86,7 +95,7 @@ const ProductDetail = (props) => {
         address: user.address,
         quantity: quantity,
         product_id: productDetail.id,
-      });
+      },userHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -107,7 +116,7 @@ const ProductDetail = (props) => {
         address: user.address,
         quantity: quantity,
         product_id: productDetail.id,
-      });
+      },userHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -296,7 +305,15 @@ const ProductDetail = (props) => {
                           >
                             {data.review}
                           </p>
-                          <h6 style={{display:"flex", justifyContent:"end",fontSize:"12px"}}>Date Posted : {data.date}</h6>
+                          <h6
+                            style={{
+                              display: "flex",
+                              justifyContent: "end",
+                              fontSize: "12px",
+                            }}
+                          >
+                            Date Posted : {data.date}
+                          </h6>
                         </div>
                       </div>
                     </div>

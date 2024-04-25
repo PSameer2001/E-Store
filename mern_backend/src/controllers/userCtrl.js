@@ -160,19 +160,10 @@ const loginUser = async (req, res) => {
   }
 };
 
-// Setcookie
-const signInsetcookie = async (req, res) => {
-  const { token } = req.params;
-  res.cookie("jwtToken", token, {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-  return res.json({message: 'Cookie set successfully!'});
-};
 
 // GetUser
 const getUserData = async (req, res) => {
-  const accessToken = req.cookies?.jwtToken;
+  const accessToken = req.headers?.jwtToken;
   if (accessToken) {
     const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     if (verifieduser) {
@@ -370,6 +361,5 @@ module.exports = {
   SendEmailVerification,
   updateUser,
   updatePassword,
-  updateProfilePhoto,
-  signInsetcookie,
+  updateProfilePhoto
 };

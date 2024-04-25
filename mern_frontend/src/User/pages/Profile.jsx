@@ -18,6 +18,7 @@ import Loader from "../components/Loader";
 import Image from "react-bootstrap/Image";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { imageDB } from "../../config/firebase_config";
+import getUserCookie from "../Auth/getUserCookie";
 
 const Profile = (props) => {
   const authUser = props.authUser;
@@ -25,7 +26,7 @@ const Profile = (props) => {
 
   const { logout } = useLogOut();
   const navigate = useNavigate();
-
+const userHeaders = getUserCookie();
   const LogOut = async () => {
     try {
       const res = await logout();
@@ -81,7 +82,7 @@ const Profile = (props) => {
       let formObject = Object.fromEntries(formData.entries());
       // console.log(formObject);
 
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateUser`, formObject);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateUser`, formObject,userHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -127,7 +128,7 @@ const Profile = (props) => {
         currentPassword,
         newPassword,
         confirmNewPassword,
-      });
+      },userHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -167,7 +168,7 @@ const Profile = (props) => {
           const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateProfilePhoto`, {
             email : currentUser.email,
             imageUrl: url
-          });
+          },userHeaders);
           let message = res.data.message;
     
           if (message === "success") {

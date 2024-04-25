@@ -1,9 +1,11 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer } from "react";
+import getUserCookie from "./getUserCookie";
 
 const AuthContext = createContext();
 
 const initialState = { name: null, email: null };
+const userHeaders  = getUserCookie();
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -18,7 +20,15 @@ const authReducer = (state, action) => {
         imageUrl: action.payload7,
       };
     case "logout":
-      return { name: null, email: null, phone: null, address: null, isAdmin: null, isSuperAdmin: null, imageUrl: null };
+      return {
+        name: null,
+        email: null,
+        phone: null,
+        address: null,
+        isAdmin: null,
+        isSuperAdmin: null,
+        imageUrl: null,
+      };
     default:
       return state;
   }
@@ -29,13 +39,24 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getUserData = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getUserData`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/api/getUserData`,userHeaders
+      );
       return res.data.userData;
     };
     getUserData()
       .then((res) => {
         if (res !== "") {
-          dispatch({ type: "login", payload: res.name, payload2: res.email, payload3: res.phone, payload4: res.address, payload5: res.isAdmin, payload6: res.isSuperAdmin, payload7: res.imageUrl});
+          dispatch({
+            type: "login",
+            payload: res.name,
+            payload2: res.email,
+            payload3: res.phone,
+            payload4: res.address,
+            payload5: res.isAdmin,
+            payload6: res.isSuperAdmin,
+            payload7: res.imageUrl,
+          });
         }
       })
       .catch((err) => console.log(err));

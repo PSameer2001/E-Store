@@ -18,6 +18,8 @@ export const useAdminSignIn = () => {
         };
 
         localStorage.setItem("authAdmin", JSON.stringify(data));
+        var expires = new Date(Date.now() + 7200 * 1000);
+        document.cookie = "jwtAdminToken="+res.data.authAdmin.token+"; max-age=" + expires.getTime() + "; path=/;";
         dispatch({
           type: "adminlogin",
           payload: res.data.authAdmin.name,
@@ -28,16 +30,6 @@ export const useAdminSignIn = () => {
           payload6: res.data.authAdmin.isSuperAdmin
         });
 
-        if (res.data.authAdmin.token) {
-          await axios.get(
-            `${process.env.REACT_APP_SERVER_URL}/api/signinadmin_setcookie`,
-            {
-              params: {
-                token: res.data.authUser.token,
-              },
-            }
-          );
-        }
       }
 
       return res.data.message;

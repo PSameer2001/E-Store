@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 
 const verifyAdminToken = async (req, res, next) => {
   try {
-    const accessToken = req.cookies?.jwtAdminToken;
+    const accessToken = req.headers?.jwtAdminToken;
     if (accessToken) {
       const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
       if (verifieduser) {
@@ -15,7 +15,7 @@ const verifyAdminToken = async (req, res, next) => {
         throw new Error("Admin not Verified");
       }
     } else {
-        // throw new Error("No Access Token");
+        throw new Error("No Access Token");
     }
   } catch (error) {
     console.log(error)

@@ -9,22 +9,24 @@ import Link from "@mui/material/Link";
 import axios from "axios";
 import CountCard from "../component/CountCard";
 import Title from "../component/Title";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminDashboard = () => {
   const [dashboard, SetDashboard] = useState([]);
   const [contact, SetContact] = useState([]);
   const [order, SetOrder] = useState([]);
+  const adminHeaders = getAdminCookie();
 
-  const getdashBoardData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getdashBoardData`);
+  const getdashBoardData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getdashBoardData`,adminHeaders);
     SetDashboard(res.data.dashboard);
     SetContact(res.data.contactdata);
     SetOrder(res.data.orderdata);
   };
 
   useEffect(() => {
-    getdashBoardData();
-  }, []);
+    getdashBoardData(adminHeaders);
+  }, [adminHeaders]);
 
   function Copyright(props) {
     return (

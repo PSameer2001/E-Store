@@ -10,19 +10,21 @@ import {
 import "swiper/css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import getUserCookie from "../../Auth/getUserCookie";
 
 const CategorySwiper = () => {
+  const userHeaders  = getUserCookie();
   const [data, setData] = useState([]);
 
-  const getallCategoryData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`);
+  const getallCategoryData = async (userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`, userHeaders);
     const resdata = res.data;
     setData(resdata);
   };
 
   useEffect(() => {
     getallCategoryData();
-  }, []);
+  }, [userHeaders]);
 
   return (
     <>

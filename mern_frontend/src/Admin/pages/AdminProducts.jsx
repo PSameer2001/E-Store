@@ -20,10 +20,12 @@ import { ButtonGroup, Tooltip } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { imageDB } from "../../config/firebase_config";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminProducts = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   let { category_id } = useParams();
 
@@ -90,17 +92,17 @@ const AdminProducts = () => {
 
   const [productImage, setProductImage] = useState();
 
-  const getallProductData = async (category_id) => {
+  const getallProductData = async (category_id,adminHeaders) => {
     const res = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,adminHeaders
     );
     const data = res.data;
     setRows(data);
   };
 
-  const getallCategoryData = async () => {
+  const getallCategoryData = async (adminHeaders) => {
     const res = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders
     );
     const data = res.data;
     setCategory(data);
@@ -143,7 +145,7 @@ const AdminProducts = () => {
           oldprice: product.oldprice,
           category: product.category,
           imagefile: iamgeUrl,
-        }
+        },adminHeaders
       );
       let message = res.data.message;
 
@@ -171,7 +173,7 @@ const AdminProducts = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/deleteProduct`,
-        { id }
+        { id },adminHeaders
       );
 
       const data = await res.data.message;
@@ -210,7 +212,7 @@ const AdminProducts = () => {
       setIsLoading(true);
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/editProduct`,
-        editproduct
+        editproduct,adminHeaders
       );
       let message = res.data.message;
 
@@ -235,9 +237,9 @@ const AdminProducts = () => {
   };
 
   useEffect(() => {
-    getallCategoryData();
-    getallProductData(category_id);
-  }, [category_id]);
+    getallCategoryData(adminHeaders);
+    getallProductData(category_id,adminHeaders);
+  }, [category_id,adminHeaders]);
 
   const style = {
     position: "absolute",

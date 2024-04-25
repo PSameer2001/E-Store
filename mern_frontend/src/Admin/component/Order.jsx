@@ -9,19 +9,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Tooltip } from "@mui/material";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 export default function Orders() {
   const [rows, setRows] = useState([]);
+  const adminHeaders = getAdminCookie();
 
-  const getRecentOrders = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getRecentOrders`);
+  const getRecentOrders = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getRecentOrders`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   useEffect(() => {
-    getRecentOrders();
-  }, []);
+    getRecentOrders(adminHeaders);
+  }, [adminHeaders]);
 
   return (
     <React.Fragment>

@@ -10,6 +10,7 @@ const useAdminLogOut = () => {
       if (res.data.message === "logout") {
         dispatch({ type: "adminlogout" });
         localStorage.removeItem("authAdmin");
+        document.cookie = "jwtAdminToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         return res.data.message;
       }
     } catch (error) {

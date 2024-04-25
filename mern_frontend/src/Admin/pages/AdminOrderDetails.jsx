@@ -11,11 +11,13 @@ import "../css/Admin.css";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import Image from "react-bootstrap/Image";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminOrderDetails = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const { order_id } = useParams();
+  const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "id", label: "Product Id" },
@@ -37,23 +39,23 @@ const AdminOrderDetails = () => {
     setPage(0);
   };
 
-  const getOrderProducts = async (orderid) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`);
+  const getOrderProducts = async (orderid,adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`,adminHeaders);
     const productdata = res.data;
     setRows(productdata);
   };
 
   const [orders, setOrders] = useState({});
-  const getOrders = async (orderid) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`);
+  const getOrders = async (orderid,adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`,adminHeaders);
     const orderdata = res.data;
     setOrders(orderdata);
   };
 
   useEffect(() => {
-    getOrderProducts(order_id);
-    getOrders(order_id);
-  }, [order_id]);
+    getOrderProducts(order_id,adminHeaders);
+    getOrders(order_id,adminHeaders);
+  }, [order_id,adminHeaders]);
 
   return (
     <>

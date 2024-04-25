@@ -17,10 +17,12 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import { ButtonGroup } from "@mui/material";
 import toast from "react-hot-toast";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminSupport = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   const [status, setStatus] = useState({
     editId: "",
@@ -70,7 +72,7 @@ const AdminSupport = () => {
       const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateTicketStatus`, {
         editId: status.editId,
         editStatus: status.editStatus
-      });
+      },adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -84,15 +86,15 @@ const AdminSupport = () => {
     }
   };
 
-  const getallTicketData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallTicketData`);
+  const getallTicketData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallTicketData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
 
   useEffect(() => {
-    getallTicketData();
-  }, []);
+    getallTicketData(adminHeaders);
+  }, [adminHeaders]);
 
   const style = {
     position: "absolute",

@@ -19,6 +19,5 @@ userRouter.post('/api/updatePassword', user.updatePassword);
 // Get method
 userRouter.get('/api/getUserData', user.getUserData);
 userRouter.get('/api/verify/:email/:Id', user.verifyEmail);
-userRouter.get('/api/signin_setcookie', user.signInsetcookie);
 
 module.exports = userRouter;

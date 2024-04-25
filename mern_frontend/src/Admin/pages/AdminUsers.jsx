@@ -14,10 +14,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faTrash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 export default function AdminUsers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "name", label: "Name" },
@@ -42,8 +44,8 @@ export default function AdminUsers() {
     setPage(0);
   };
 
-  const getallUserData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallUserData`);
+  const getallUserData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallUserData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
@@ -52,7 +54,7 @@ export default function AdminUsers() {
 
   const handledeleteuser = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteUser`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteUser`, { id },adminHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -68,8 +70,8 @@ export default function AdminUsers() {
   };
 
   useEffect(() => {
-    getallUserData();
-  }, []);
+    getallUserData(adminHeaders);
+  }, [adminHeaders]);
 
   return (
     <div className="adminlist_div">

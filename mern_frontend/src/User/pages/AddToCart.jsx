@@ -7,10 +7,11 @@ import { faChevronDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import toast from "react-hot-toast";
 import appicon from "../components/images/appicon.png";
+import getUserCookie from "../Auth/getUserCookie";
 
 const AddToCart = (props) => {
   const [isCollapse, SetIsCollapse] = useState(false);
-
+  const userHeaders = getUserCookie();
   const handleCollapse = () => {
     SetIsCollapse((collapse) => !collapse);
   };
@@ -39,10 +40,10 @@ const AddToCart = (props) => {
   });
   const [couponAmount, setcouponAmount] = useState(0);
 
-  const getCartData = async (email) => {
+  const getCartData = async (email, userHeaders) => {
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getCartData`, {
       email: email,
-    });
+    }, userHeaders);
     const data = res.data;
     setCart(data);
 
@@ -71,10 +72,10 @@ const AddToCart = (props) => {
     setfinalAmount(finalAmount);
   };
 
-  const getUserCouponData = async (email) => {
+  const getUserCouponData = async (email,userHeaders) => {
     const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getUserCouponData`, {
       email: email,
-    });
+    },userHeaders);
     const data = res.data;
     setCoupon(data);
   };
@@ -88,7 +89,7 @@ const AddToCart = (props) => {
   const removeFromCart = async (id) => {
     try {
       removeCoupon();
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/removeFromCart`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/removeFromCart`, { id },userHeaders);
       const data = await res.data.message;
       if (data === "success") {
         toast.success("Removed Successful", { duration: 1000 });
@@ -119,7 +120,7 @@ const AddToCart = (props) => {
     if (couponAmount !== 0) {
       await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/removeCoupon`, {
         email: user.email,
-      });
+      },userHeaders);
 
       setcouponApplied({});
       setcouponAmount(0);
@@ -132,12 +133,12 @@ const AddToCart = (props) => {
         const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/updateQuantityofProduct`, {
           id: cartId,
           quantity: cartQuantity,
-        });
+        },userHeaders);
 
         const data = await res.data.message;
         if (data === "success") {
-          getCartData(user.email);
-          getUserCouponData(user.email);
+          getCartData(user.email,userHeaders);
+          getUserCouponData(user.email,userHeaders);
           // getallCouponData();
         } else {
           toast.error(data, { duration: 1000 });
@@ -146,7 +147,7 @@ const AddToCart = (props) => {
 
       return () => clearTimeout(timer);
     }
-  }, [cartId, cartQuantity, user]);
+  }, [cartId, cartQuantity, user,userHeaders]);
 
   const selectCoupon = (coupon) => {
     setcouponSelect({
@@ -161,7 +162,7 @@ const AddToCart = (props) => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/removeCoupon`, {
         email: user.email,
-      });
+      },userHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -199,7 +200,7 @@ const AddToCart = (props) => {
         coupon_id: couponSelect.coupon_id,
         couponText: couponSelect.coupon_text,
         email: user.email,
-      });
+      },userHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -254,7 +255,7 @@ const AddToCart = (props) => {
             couponApplied,
             shippingAmount,
             expectedDelivery: { todaydate, nextdate },
-          });
+          },userHeaders);
           const message = res.data.message;
 
           setcouponApplied({});
@@ -292,7 +293,7 @@ const AddToCart = (props) => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/checkoutProduct`, {
         finalAmount,
-      });
+      },userHeaders);
       // console.log(data);
       initPay(data.data);
     } catch (error) {

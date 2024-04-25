@@ -3,22 +3,23 @@ import ListGroup from "react-bootstrap/ListGroup";
 import "../css/myOrder.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import getUserCookie from "../Auth/getUserCookie";
 
 const MyOrder = (props) => {
   const authUser = props.authUser;
   const user = authUser.state;
-
+const userHeaders = getUserCookie();
   const [allorders, setAllOrders] = useState([]);
 
-  const getAllUserOrders = async (email) => {
-    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getAllUserOrders`, { email });
+  const getAllUserOrders = async (email,userHeaders) => {
+    const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/getAllUserOrders`, { email },userHeaders);
     const data = res.data;
     setAllOrders(data);
   };
 
   useEffect(() => {
-    getAllUserOrders(user.email);
-  }, [user]);
+    getAllUserOrders(user.email,userHeaders);
+  }, [user,userHeaders]);
 
   return (
     <div className="myorder">

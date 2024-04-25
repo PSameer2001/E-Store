@@ -5,11 +5,12 @@ import appicon from "../components/images/appicon.png";
 import axios from "axios";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import toast from "react-hot-toast";
+import getUserCookie from "../Auth/getUserCookie";
 
 const MyOrderDetail = (props) => {
   const authUser = props.authUser;
   const user = authUser.state;
-
+const userHeaders = getUserCookie();
   const { orderid } = useParams();
 
   const [orders, setOrders] = useState({});
@@ -18,8 +19,8 @@ const MyOrderDetail = (props) => {
   const [progressdata, setProgressData] = useState(0);
   const [productAmount, setproductAmount] = useState(0);
 
-  const getOrders = async (orderid) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`);
+  const getOrders = async (orderid,userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrders/${orderid}`,userHeaders);
     const orderdata = res.data;
     setOrders(orderdata);
 
@@ -34,8 +35,8 @@ const MyOrderDetail = (props) => {
     }
   };
 
-  const getOrderProducts = async (orderid) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`);
+  const getOrderProducts = async (orderid,userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getOrderProducts/${orderid}`,userHeaders);
     const productdata = res.data;
     setProductData(productdata);
 
@@ -51,21 +52,21 @@ const MyOrderDetail = (props) => {
       id,
       productReview,
       email: user.email,
-    });
+    },userHeaders);
     const message = res.data.message;
 
     if (message === "success") {
       toast.success("Review Added Successfully", { duration: 1000 });
       setProductReview("");
-      getOrders(orderid);
-      getOrderProducts(orderid);
+      getOrders(orderid,userHeaders);
+      getOrderProducts(orderid,userHeaders);
     }
   };
 
   useEffect(() => {
-    getOrders(orderid);
-    getOrderProducts(orderid);
-  }, [orderid]);
+    getOrders(orderid,userHeaders);
+    getOrderProducts(orderid,userHeaders);
+  }, [orderid,userHeaders]);
 
   return (
     <>

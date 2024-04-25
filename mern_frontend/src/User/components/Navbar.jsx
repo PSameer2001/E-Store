@@ -19,10 +19,12 @@ import { ToastContainer } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 import useLogOut from "../Hooks/useLogOut";
 import axios from "axios";
+import getUserCookie from "../Auth/getUserCookie";
 
 const Navbar = (props) => {
   const authUser = props.authUser;
   const user = authUser.state;
+  const userHeaders = getUserCookie();
 
   const [isActiveSearch, setIsActiveSearch] = useState(false);
   const [isActiveUserr, setIsActiveUserr] = useState(false);
@@ -65,8 +67,8 @@ const Navbar = (props) => {
     }
   };
 
-  const getEveryProduct = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getEveryProduct`);
+  const getEveryProduct = async (userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getEveryProduct`,userHeaders);
     const data = res.data;
     setallProduct(data);
   };
@@ -92,10 +94,10 @@ const Navbar = (props) => {
   };
 
   useEffect(() => {
-    getEveryProduct();
+    getEveryProduct(userHeaders);
     window.addEventListener("scroll", handleOnScroll);
     return () => window.removeEventListener("scroll", handleOnScroll);
-  }, []);
+  }, [userHeaders]);
 
   return (
     <>

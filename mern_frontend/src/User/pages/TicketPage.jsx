@@ -2,26 +2,31 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListGroup from "react-bootstrap/ListGroup";
 import "../css/Ticket.css";
+import getUserCookie from "../Auth/getUserCookie";
 
 const TicketPage = (props) => {
   const authUser = props.authUser;
   const user = authUser.state;
-
+  const userHeaders = getUserCookie();
   const [allticket, setAllTicket] = useState([]);
 
-  const getuserTicketData = async (email) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getuserTicketData`, {
-      params: {
-        email: email,
+  const getuserTicketData = async (email, userHeaders) => {
+    const res = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/getuserTicketData`,
+      {
+        params: {
+          email: email,
+        },
       },
-    });
+      userHeaders
+    );
     const data = res.data;
     setAllTicket(data);
   };
 
   useEffect(() => {
-    getuserTicketData(user.email);
-  }, [user]);
+    getuserTicketData(user.email, userHeaders);
+  }, [user, userHeaders]);
   return (
     <>
       <div className="myticket">
@@ -60,7 +65,8 @@ const TicketPage = (props) => {
                       Subject : {ticket.subject} <br />
                     </div>
                     <div className="right_content">
-                      Ticket Status : {ticket.status === "0" ? "Not Resolved" : "Resolved"}
+                      Ticket Status :{" "}
+                      {ticket.status === "0" ? "Not Resolved" : "Resolved"}
                       <br />
                       Created On : {formattedDate}
                     </div>

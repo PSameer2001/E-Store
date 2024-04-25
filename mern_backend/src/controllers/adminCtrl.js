@@ -105,24 +105,10 @@ const loginAdmin = async (req, res) => {
   }
 };
 
-// Setcookie
-const signInAdminsetcookie = async (req, res) => {
-  const { token } = req.params;
-
-  try {
-  res.cookie("jwtAdminToken", token, {
-    httpOnly: true,
-    maxAge: 24 * 60 * 60 * 1000,
-  });
-  return res.json({message: 'Cookie set successfully!'});
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // Get Admin data
 const getAdminData = async (req, res) => {
-  const accessToken = req.cookies?.jwtAdminToken;
+  const accessToken = req.headers?.jwtAdminToken;
   if (accessToken) {
     const verifieduser = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     if (verifieduser) {
@@ -350,6 +336,5 @@ module.exports = {
   deleteAdmin,
   deleteUser,
   editAdmin,
-  getdashBoardData,
-  signInAdminsetcookie
+  getdashBoardData
 };

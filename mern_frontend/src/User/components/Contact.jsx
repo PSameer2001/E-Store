@@ -3,20 +3,23 @@ import callsuport from "./images/callsuport.png";
 import toast from "react-hot-toast";
 import axios from "axios";
 import Loader from "./Loader";
+import getUserCookie from "../Auth/getUserCookie";
 
 const Contact = (props) => {
   var user = props.user;
+  const userHeaders  = getUserCookie();
   const [message, setMessage] = useState("");
   const [subject, setSubject] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [ticket, setIsTicket] = useState(false);
 
-  const getactiveTicketData = async (email) => {
+  const getactiveTicketData = async (email,userHeaders) => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getactiveTicketData/` ,{
       params : {
         email: email
       }
-    });
+    },
+    userHeaders);
     const data = res.data.message;
     setIsTicket(data);
   };
@@ -35,7 +38,8 @@ const Contact = (props) => {
         email: user.email,
         message,
         subject,
-      });
+      },
+      userHeaders);
       let resdata = res.data.message;
 
       if (resdata === "success") {
@@ -56,8 +60,9 @@ const Contact = (props) => {
   };
 
   useEffect(() => {
-    getactiveTicketData(user.email);
-  }, [user])
+    getactiveTicketData(user.email,
+      userHeaders);
+  }, [user,userHeaders])
   
 
   return (

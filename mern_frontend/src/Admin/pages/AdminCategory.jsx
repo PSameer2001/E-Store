@@ -23,10 +23,12 @@ import { Link } from "react-router-dom";
 import LayersIcon from "@mui/icons-material/Layers";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { imageDB } from "../../config/firebase_config";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminCategory = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "name", label: "Name" },
@@ -93,7 +95,7 @@ const AdminCategory = () => {
             {
               name: name,
               imageUrl: url,
-            }
+            },adminHeaders
           );
           let message = res.data.message;
 
@@ -114,7 +116,7 @@ const AdminCategory = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/deleteCategory`,
-        { id }
+        { id },adminHeaders
       );
 
       const data = await res.data.message;
@@ -129,9 +131,9 @@ const AdminCategory = () => {
     }
   };
 
-  const getallCategoryData = async () => {
+  const getallCategoryData = async (adminHeaders) => {
     const res = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,adminHeaders
     );
     const data = res.data;
     setRows(data);
@@ -181,7 +183,7 @@ const AdminCategory = () => {
                 imageUrl: url,
                 name: name,
                 editId: editId,
-              }
+              },adminHeaders
             );
 
             var message = res.data.message;
@@ -203,7 +205,7 @@ const AdminCategory = () => {
           {
             name: name,
             editId: editId,
-          }
+          },adminHeaders
         );
 
         var message = res.data.message;
@@ -224,8 +226,8 @@ const AdminCategory = () => {
   };
 
   useEffect(() => {
-    getallCategoryData();
-  }, []);
+    getallCategoryData(adminHeaders);
+  }, [adminHeaders]);
 
   const style = {
     position: "absolute",

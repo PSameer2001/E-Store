@@ -21,6 +21,8 @@ export const useSignIn = () => {
         };
 
         localStorage.setItem("authUser", JSON.stringify(data));
+        var expires = new Date(Date.now() + 7200 * 1000);
+        document.cookie = "jwtToken="+res.data.authUser.token+"; max-age=" + expires.getTime() + "; path=/;";
         dispatch({
           type: "login",
           payload: res.data.authUser.name,
@@ -32,16 +34,6 @@ export const useSignIn = () => {
           payload7: res.data.authUser.imageUrl,
         });
 
-        if (res.data.authUser.token) {
-          await axios.get(
-            `${process.env.REACT_APP_SERVER_URL}/api/signin_setcookie`,
-            {
-              params: {
-                token: res.data.authUser.token,
-              },
-            }
-          );
-        }
       }
 
       return res.data.message;

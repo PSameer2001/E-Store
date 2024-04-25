@@ -21,10 +21,12 @@ import { Link, useParams } from "react-router-dom";
 import Image from "react-bootstrap/esm/Image";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { imageDB } from "../../config/firebase_config";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminProductImage = () => {
   let { productid, category_id } = useParams();
   const product_id = productid;
+  const adminHeaders = getAdminCookie();
 
   const [rows, setRows] = useState([]);
   const [imageopen, setImageOpen] = useState(false);
@@ -43,9 +45,9 @@ const AdminProductImage = () => {
     setSelectedValue(value);
   };
 
-  const getallProductImageData = async (product_id) => {
+  const getallProductImageData = async (product_id,adminHeaders) => {
     const res = await axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`
+      `${process.env.REACT_APP_SERVER_URL}/api/getallImageProductData/${product_id}`,adminHeaders
     );
     const data = res.data;
     setRows(data);
@@ -58,8 +60,8 @@ const AdminProductImage = () => {
   };
 
   useEffect(() => {
-    getallProductImageData(product_id);
-  }, [product_id]);
+    getallProductImageData(product_id,adminHeaders);
+  }, [product_id,adminHeaders]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -114,7 +116,7 @@ const AdminProductImage = () => {
         {
           Id: product_id,
           imageUrl: imageUrl
-        }
+        },adminHeaders
       );
       let message = res.data.message;
 
@@ -135,7 +137,7 @@ const AdminProductImage = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/deleteImageProduct`,
-        { id }
+        { id },adminHeaders
       );
 
       const data = await res.data.message;
@@ -160,7 +162,7 @@ const AdminProductImage = () => {
       }
 
       const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/api/makeDefaultImageProduct/${selectedValue}/${product_id}`
+        `${process.env.REACT_APP_SERVER_URL}/api/makeDefaultImageProduct/${selectedValue}/${product_id}`,adminHeaders
       );
 
       const data = await res.data.message;

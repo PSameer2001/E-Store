@@ -1,9 +1,11 @@
 import axios from "axios";
 import { createContext, useEffect, useReducer } from "react";
+import getAdminCookie from "./getAdminCookie";
 
 const AdminAuthContext = createContext();
 
 const admin_initialState = { name: null, email: null };
+const adminHeaders = getAdminCookie();
 
 const AdminauthReducer = (state, action) => {
   switch (action.type) {
@@ -17,7 +19,14 @@ const AdminauthReducer = (state, action) => {
         isSuperAdmin: action.payload6,
       };
     case "adminlogout":
-      return { name: null, email: null, phone: null, address: null, isAdmin: null, isSuperAdmin: null };
+      return {
+        name: null,
+        email: null,
+        phone: null,
+        address: null,
+        isAdmin: null,
+        isSuperAdmin: null,
+      };
     default:
       return state;
   }
@@ -28,14 +37,25 @@ const AdminAuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getAdminData = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAdminData`);
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/api/getAdminData`,
+        adminHeaders
+      );
       return res.data.adminData;
     };
     getAdminData()
       .then(async (res) => {
         if (res !== "") {
-          dispatch({ type: "adminlogin", payload: res.name, payload2: res.email, payload3: res.phone, payload4: res.address, payload5: res.isAdmin, payload6: res.isSuperAdmin});
-        }else{
+          dispatch({
+            type: "adminlogin",
+            payload: res.name,
+            payload2: res.email,
+            payload3: res.phone,
+            payload4: res.address,
+            payload5: res.isAdmin,
+            payload6: res.isSuperAdmin,
+          });
+        } else {
           const res2 = await axios.post("/adminlogout");
           if (res2.data.message === "logout") {
             dispatch({ type: "adminlogout" });

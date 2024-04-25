@@ -16,31 +16,33 @@ import {
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import getUserCookie from "../../Auth/getUserCookie";
 
 const ContentSwiper = (props) => {
+  const userHeaders  = getUserCookie();
   const section = props.section;
   const authUser = props.authUser;
 
   const [productdata, setProductData] = useState([]);
   const [category, setCategory] = useState([]);
 
-  const getallProductData = async (category_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`);
+  const getallProductData = async (category_id,userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,userHeaders);
     const data = res.data;
     setProductData(data);
   };
 
-  const getallCategoryData = async (category_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`);
+  const getallCategoryData = async (category_id,userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallCategoryData`,userHeaders);
     const data = res.data;
     const category = data.filter((data) => data.id === category_id)[0];
     setCategory(category);
   };
 
   useEffect(() => {
-    getallProductData(section.category_id);
-    getallCategoryData(section.category_id);
-  }, [section]);
+    getallProductData(section.category_id,userHeaders);
+    getallCategoryData(section.category_id, userHeaders);
+  }, [section,userHeaders]);
 
   const handleCart = async (productid) => {
     try {
@@ -49,7 +51,7 @@ const ContentSwiper = (props) => {
         address: authUser.address,
         quantity: 1,
         product_id: productid,
-      });
+      }, userHeaders);
       let message = res.data.message;
 
       if (message === "success") {

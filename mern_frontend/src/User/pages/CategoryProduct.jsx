@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Badge from "react-bootstrap/Badge";
+import getUserCookie from "../Auth/getUserCookie";
 
 const CategoryProduct = () => {
   const [openfilter, setOpenFilter] = useState(true);
@@ -19,11 +20,11 @@ const CategoryProduct = () => {
   const [allproducts, setAllProducts] = useState([]);
   const [brands, setBrands] = useState([]);
   const screenSize = useScreenSize();
-
+const userHeaders = getUserCookie();
   const { category_id } = useParams();
 
-  const getallProductData = async (category_id) => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`);
+  const getallProductData = async (category_id,userHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallProductData/${category_id}`,userHeaders);
     const data = res.data;
     setAllProducts(data);
     setProducts(data);
@@ -51,8 +52,8 @@ const CategoryProduct = () => {
   };
 
   useEffect(() => {
-    getallProductData(category_id);
-  }, [category_id]);
+    getallProductData(category_id,userHeaders);
+  }, [category_id,userHeaders]);
 
   useEffect(() => {
     if (screenSize.width > 768) {

@@ -19,10 +19,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { ButtonGroup } from "@mui/material";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 export default function AdminList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders =getAdminCookie();
 
   const columns = [
     { id: "name", label: "Name" },
@@ -94,7 +96,7 @@ export default function AdminList() {
         name,
         email,
         password,
-      });
+      },adminHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -119,7 +121,7 @@ export default function AdminList() {
 
   const handledeleteAdmin = async (id) => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteAdmin`, { id });
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/deleteAdmin`, { id },adminHeaders);
 
       const data = await res.data.message;
       if (data === "success") {
@@ -138,8 +140,8 @@ export default function AdminList() {
     }
   };
 
-  const getallAdminData = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallAdminData`);
+  const getallAdminData = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getallAdminData`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
@@ -169,7 +171,7 @@ export default function AdminList() {
           email,
           password,
           editId
-        });
+        },adminHeaders);
 
         const data = await res.data.message;
         if (data === "success") {
@@ -193,8 +195,8 @@ export default function AdminList() {
       }
   };
 
-  useEffect(() => {
-    getallAdminData();
+  useEffect((adminHeaders) => {
+    getallAdminData(adminHeaders);
   }, []);
 
   const style = {

@@ -18,10 +18,12 @@ import Loader from "../component/Loader";
 import Box from "@mui/material/Box";
 import { ButtonGroup } from "@mui/material";
 import toast from "react-hot-toast";
+import getAdminCookie from "../AdminAuth/getAdminCookie";
 
 const AdminOrders = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  const adminHeaders = getAdminCookie();
 
   const columns = [
     { id: "id", label: "Order Id" },
@@ -53,8 +55,8 @@ const AdminOrders = () => {
     setPage(0);
   };
 
-  const getAllOrders = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAllOrders`);
+  const getAllOrders = async (adminHeaders) => {
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/getAllOrders`,adminHeaders);
     const data = res.data;
     setRows(data);
   };
@@ -106,7 +108,7 @@ const AdminOrders = () => {
 
     try {
       setIsLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editOrder`, editdata);
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/editOrder`, editdata,adminHeaders);
       let message = res.data.message;
 
       if (message === "success") {
@@ -130,8 +132,8 @@ const AdminOrders = () => {
   };
 
   useEffect(() => {
-    getAllOrders();
-  }, []);
+    getAllOrders(adminHeaders);
+  }, [adminHeaders]);
 
   const style = {
     position: "absolute",
