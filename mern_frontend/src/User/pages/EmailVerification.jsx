@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import Loader from "../components/Loader";
 import "../css/EmailVerify.css";

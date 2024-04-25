@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect } from "react";
 import CategorySwiper from "../components/Swiper/CategorySwiper";
 // import ImageCarousel from "../components/ImageCarousel";

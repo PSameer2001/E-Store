@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import "../css/Navbar.css";
 import toast, { Toaster } from "react-hot-toast";

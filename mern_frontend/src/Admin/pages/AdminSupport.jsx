@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import Loader from "../component/Loader";

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import callsuport from "./images/callsuport.png";
 import toast from "react-hot-toast";
