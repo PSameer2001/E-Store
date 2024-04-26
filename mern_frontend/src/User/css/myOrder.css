@@ -9,7 +9,7 @@
 }
 
 .myorder .content{
-    width: 60%;
+    width: 80%;
     margin: auto;
     border: 1px solid gray;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
@@ -33,4 +33,15 @@
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     opacity: 1;
     border: 2px solid gray;
+}
+
+@media (max-width: 575.98px) {
+    .myorder li {
+       display: flex;
+       flex-wrap: wrap;
+    }
+
+    .myorder .right_content {
+        flex: 0 0 100%;
+     }
 }

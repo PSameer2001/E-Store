@@ -43,8 +43,8 @@ const Gadgets = () => {
               <img src={c3} alt="" />
             </div>
             <div className="content1">
-              <h2>Skin care products</h2>
-              <p>Face washes, Creams & moisturizers, Body lotions Etc</p>
+              <h2>Mobile Products</h2>
+              <p>Mobile,Earphones,Chargers</p>
               <a href="/" >
                 open
               </a>
