@@ -47,7 +47,7 @@ const Home = (props) => {
 
       {/* Gadgets */}
       <section className="gadgets" id="gadgets">
-        <Gadgets />
+        {/* <Gadgets /> */}
       </section>
 
       {/* Contents */}

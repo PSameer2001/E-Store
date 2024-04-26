@@ -55,3 +55,17 @@
   color: #ffffff;
   background-color: #ff8c6b;
 }
+
+@media (max-width: 576px) {
+  .EmailVerif_div .divContainer {
+    height: 40vh;
+    width: 70vh;
+  }
+}
+
+@media (max-width: 450px) {
+  .EmailVerif_div .divContainer {
+    height: 40vh;
+    width: 45vh;
+  }
+}
