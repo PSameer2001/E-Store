@@ -91,7 +91,7 @@ const ProductDetail = (props) => {
 
   const handleCart = async () => {
     try {
-      const res = await axios.post("/addtoCart", {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addtoCart`, {
         email: user.email,
         address: user.address,
         quantity: quantity,
@@ -112,7 +112,7 @@ const ProductDetail = (props) => {
 
   const handleBuy = async () => {
     try {
-      const res = await axios.post("/addtoCart", {
+      const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/addtoCart`, {
         email: user.email,
         address: user.address,
         quantity: quantity,
