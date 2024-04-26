@@ -188,12 +188,16 @@ const getUserData = async (req, res) => {
 
 // Check User Exist
 const SendOtp = async (req, res) => {
+ 
   const user = await User.findOne({ email: req.body.email });
+ 
   if (user) {
     var min = 100000;
     var max = 999999;
     const randomOTP = Math.floor(Math.random() * (max - min + 1)) + min;
-    await User.findOneAndUpdate({ id: user.id }, { $set: { Otp: randomOTP } });
+    await User.findByIdAndUpdate(user._id, {
+      Otp: randomOTP,
+    });
 
     const pathname = path.join(__dirname, "../views/otpVerification.ejs");
     sendEmail(
@@ -242,9 +246,8 @@ const forgetPassword = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(password, round);
-    const upd_pass = await User.findOneAndUpdate(
-      { id: findUser.id },
-      { $set: { Otp: "", password: hashPassword, cpassword: password } }
+    const upd_pass = await User.findByIdAndUpdate(findUser._id ,
+      { Otp: "", password: hashPassword, cpassword: password }
     );
 
     if (upd_pass) {

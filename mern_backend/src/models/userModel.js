@@ -42,7 +42,8 @@ const UserSchema = mongoose.Schema({
     default: false,
   },
   Otp: {
-    type: Number
+    type: Number,
+    default: 0,
   }
 });
 
