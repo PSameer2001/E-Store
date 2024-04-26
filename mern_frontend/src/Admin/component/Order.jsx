@@ -28,6 +28,7 @@ export default function Orders() {
 
   return (
     <React.Fragment>
+      <div style={{width:"100%",overflow:"auto"}}>
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
@@ -60,6 +61,7 @@ export default function Orders() {
       <Link to="/admin/orders" sx={{ mt: 3 }}>
         See more orders
       </Link>
+      </div>
     </React.Fragment>
   );
 }
