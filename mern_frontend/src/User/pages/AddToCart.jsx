@@ -112,10 +112,11 @@ const AddToCart = (props) => {
         getCartData(user.email);
         // getallCouponData();
         getUserCouponData(user.email);
+        setcheckoutbtn(true);
       } else {
         toast.error(data, { duration: 1000 });
+        setcheckoutbtn(true);
       }
-      setcheckoutbtn(true);
     } catch (error) {
       console.log(error);
     }
@@ -169,10 +170,11 @@ const AddToCart = (props) => {
           getCartData(user.email);
           getUserCouponData(user.email);
           // getallCouponData();
+          setcheckoutbtn(true);
         } else {
           toast.error(data, { duration: 1000 });
+          setcheckoutbtn(true);
         }
-        setcheckoutbtn(true);
       }, 1000);
 
       return () => clearTimeout(timer);
@@ -205,12 +207,12 @@ const AddToCart = (props) => {
         setcouponAmount(0);
         getCartData(user.email);
         getUserCouponData(user.email);
+        setcheckoutbtn(true);
         // getallCouponData();
       } else {
         toast.error(data, { duration: 1000 });
+        setcheckoutbtn(true);
       }
-      
-      setcheckoutbtn(true);
     } catch (error) {
       console.log(error);
     }
@@ -250,11 +252,12 @@ const AddToCart = (props) => {
         getCartData(user.email);
         getUserCouponData(user.email);
         // getallCouponData();
+        setcheckoutbtn(true);
       } else {
         toast.error(data, { duration: 1000 });
+        setcheckoutbtn(true);
       }
-      
-      setcheckoutbtn(true);
+    
     } catch (error) {
       console.log(error);
     }
