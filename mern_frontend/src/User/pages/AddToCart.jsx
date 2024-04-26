@@ -77,6 +77,7 @@ const AddToCart = (props) => {
 
     var finalAmount = totalPrice + shipping_price - coup_amnt;
     setfinalAmount(finalAmount);
+    setcheckoutbtn(true);
   };
 
   const getUserCouponData = async (email) => {
@@ -112,7 +113,6 @@ const AddToCart = (props) => {
         getCartData(user.email);
         // getallCouponData();
         getUserCouponData(user.email);
-        setcheckoutbtn(true);
       } else {
         toast.error(data, { duration: 1000 });
         setcheckoutbtn(true);
@@ -170,7 +170,6 @@ const AddToCart = (props) => {
           getCartData(user.email);
           getUserCouponData(user.email);
           // getallCouponData();
-          setcheckoutbtn(true);
         } else {
           toast.error(data, { duration: 1000 });
           setcheckoutbtn(true);
@@ -207,7 +206,6 @@ const AddToCart = (props) => {
         setcouponAmount(0);
         getCartData(user.email);
         getUserCouponData(user.email);
-        setcheckoutbtn(true);
         // getallCouponData();
       } else {
         toast.error(data, { duration: 1000 });
@@ -252,7 +250,6 @@ const AddToCart = (props) => {
         getCartData(user.email);
         getUserCouponData(user.email);
         // getallCouponData();
-        setcheckoutbtn(true);
       } else {
         toast.error(data, { duration: 1000 });
         setcheckoutbtn(true);
