@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const order = require('../controllers/orderCtrl');
 const { verifyToken } = require('../middlewares/authMiddleware');
+const { verifyAdminToken } = require('../middlewares/adminAuthMiddleware');
 
 const orderRouter = Router();
 
@@ -8,7 +9,7 @@ const orderRouter = Router();
 orderRouter.post("/api/checkoutProduct",verifyToken, order.checkoutProduct);
 orderRouter.post("/api/verifyPayment",verifyToken, order.verifyPayment);
 orderRouter.post("/api/getAllUserOrders",verifyToken, order.getAllUserOrders);
-orderRouter.post("/api/editOrder",verifyToken, order.editOrder);
+orderRouter.post("/api/editOrder",verifyAdminToken, order.editOrder);
 orderRouter.post("/api/addReview",verifyToken, order.addReview);
 
 // get method
