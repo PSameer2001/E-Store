@@ -6,7 +6,7 @@
 }
 
 .LoginDiv .divContainer {
-    height: 60vh;
+    height: auto;
     width: 80vh;
     border-radius: 10px;
     box-shadow: 0px 6px 6px 0px rgb(77, 83, 86);
@@ -57,14 +57,14 @@
 
   @media(max-width:550px){
     .LoginDiv .divContainer {
-        height: 60vh;
+       height: auto;
         width: 70vh;
     }
   }
 
   @media(max-width:480px){
     .LoginDiv .divContainer {
-        height: 60vh;
+       height: auto;
         width: 60vh;
     }
 
@@ -76,7 +76,7 @@
 
   @media(max-width:400px){
     .LoginDiv .divContainer {
-        height: 60vh;
+        height: auto;
         width: 50vh;
     }
 
@@ -89,7 +89,7 @@
 
   @media(max-width:340px){
     .LoginDiv .divContainer {
-        height: 60vh;
+        height: auto;
         width: 45vh;
     }
 

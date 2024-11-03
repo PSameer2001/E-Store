@@ -72,7 +72,7 @@ export default function AdminUsers() {
 
   useEffect(() => {
     getallUserData(adminHeaders);
-  }, [adminHeaders]);
+  }, []);
 
   return (
     <div className="adminlist_div">
@@ -111,7 +111,7 @@ export default function AdminUsers() {
                 .map((row) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                      <TableCell key="operation" align="left">
+                      <TableCell key="operation" align="left" >
                         <Button
                           onClick={() => {
                             const confirmBox = window.confirm(
